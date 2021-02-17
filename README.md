@@ -1,1 +1,1 @@
-# browninan_bug_fluid
+This folder contains the scripts and mathematical analyses aimed at reproducing the results from Young, W. R., Roberts, A. J., & Stuhne, G. (2001). _Reproductive pair correlations and the clustering of organisms_. Nature, 412(6844), 328-331.
