@@ -3,28 +3,26 @@
 rm(list=ls())
 graphics.off()
 
-f=read.table("Spatial_distribution_particle_Fig2a.txt",header=F,sep=";",dec='.')
+f=read.table("../simulation/Spatial_distribution_particle_Fig2a.txt",header=F,sep=";",dec='.') #Without birth or death
 colnames(f)=c("t","x","y","yfirst","first_parent")
  
 png("spatial_distribution_Fig2.png",width=450,height=900)
 par(mfrow=c(2,1),cex=1.5,oma=c(0.,.5,.25,0.25))
 
 ##Create color and parent correspondance, to keep the first y position
-#pal = colorRampPalette(c("blue", "red"))
 select_t=0
 
 yfirst=f$yfirst[f$t==select_t]
 first_parent=f$first_parent[f$t==select_t]
 table_parent=matrix(NA,length(yfirst),3) #Y, name of the parent, color
 order_yfirst = order(yfirst)
-#cols=pal(length(yfirst))
 cols=rainbow(length(yfirst))
 
 table_parent[,1]=yfirst[order_yfirst]
 table_parent[,2]=first_parent[order_yfirst]
 table_parent[,3]=cols
 
-#Now, we want the spatial distribution of each point at t=select_t
+#Now, we want the spatial distribution of each point at t=30
 par(mar=c(2.,4.,2.,0.2))
 select_t=30
 print(select_t)
@@ -42,24 +40,21 @@ for(i in 1:length(y)){
 }
 text(-0.25,1.0,"a",xpd=T,font=2)
 
-f=read.table("Spatial_distribution_particle_Fig2b.txt",header=F,sep=";",dec='.')
+f=read.table("../simulation/Spatial_distribution_particle_Fig2b.txt",header=F,sep=";",dec='.') #With birth and death
 colnames(f)=c("t","x","y","yfirst","first_parent")
-##Create color and parent correspondance, to keep the first y position
-#pal = colorRampPalette(c("blue", "red"))
 select_t=0
 
 yfirst=f$yfirst[f$t==select_t]
 first_parent=f$first_parent[f$t==select_t]
 table_parent=matrix(NA,length(yfirst),3) #Y, name of the parent, color
 order_yfirst = order(yfirst)
-#cols=pal(length(yfirst))
 cols=rainbow(length(yfirst))
 
 table_parent[,1]=yfirst[order_yfirst]
 table_parent[,2]=first_parent[order_yfirst]
 table_parent[,3]=cols
 
-#Now, we want the spatial distribution of each point at t=select_t
+#Now, we want the spatial distribution of each point at t=1000
 par(mar=c(2.,4.,2.,0.2))
 select_t=1000
 print(select_t)

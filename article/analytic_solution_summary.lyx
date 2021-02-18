@@ -225,7 +225,7 @@ noprefix "false"
 
 \end_inset
 
-, we can integrae between 0 and 
+, we can integrate between 0 and 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -474,7 +474,7 @@ r
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
- & G(\boldsymbol{r},t) & = & 2\lambda C\int_{\mathbb{R}^{2}}\int_{0}^{t}H(\boldsymbol{r}-\boldsymbol{r'},t')\delta(\boldsymbol{r'})dr'dt'\\
+ & G(\boldsymbol{r},t) & = & 2\lambda C\int_{\mathbb{R}^{2}}\int_{0}^{t}H(\boldsymbol{r}-\boldsymbol{r'},t')\delta(\boldsymbol{r'})d\boldsymbol{r}'dt'\\
 \Leftrightarrow &  & = & 2\lambda C\int_{0}^{t}H(\boldsymbol{r},t')dt'
 \end{align*}
 

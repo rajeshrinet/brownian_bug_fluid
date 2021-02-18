@@ -4,7 +4,7 @@ class basic_particle
 {
   double x;
   double y;
-  double y_first;
+  double y_first; //y_first is the initial y position of the first parent, tracked for plotting reasons
   int first_parent;
 
  public:
@@ -24,7 +24,7 @@ class basic_particle
   int get_firstparent();
 
   //Movement of each particle
-  void diffusion(double Delta,double Lmax);
-  void check_boundaries(double Lmax);
-  void pierrehumbert_flow(double U_tot, double k, double phi, double theta, double Lmax);
+  void diffusion(double Delta,double Lmax); //new values of x and y after particle random walk
+  void check_boundaries(double Lmax); //checking that particles remain in a Lmax x Lmax grid
+  void pierrehumbert_flow(double U_tot, double k, double phi, double theta, double Lmax); //new values of x and y after advection
 };

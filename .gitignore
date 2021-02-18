@@ -1,1 +1,5 @@
 *.lyx~
+*.o
+*.out
+*.txt
+*.swp

@@ -9,8 +9,6 @@
 
 gsl_rng *rgslbis = gsl_rng_alloc(gsl_rng_mt19937);
 
-//gsl_rng_set(rgslbis, 5);
-
 using namespace std;
 
 //Creator and destructor
@@ -74,34 +72,12 @@ int basic_particle::get_firstparent()
   return first_parent;
 }
 
-//Mvt of each particle
+//Movement of each particle
 //Diffusion
 void basic_particle::diffusion(double Delta, double Lmax)
 {
-//I do not know how to initialize the random function IN basic_particle.cpp and not only in main.cpp. Therefore, I need to change the seed, which is the current, varying time, with execution
-	/*std::default_random_engine generator ((unsigned)time(NULL) );
-	std::uniform_real_distribution<double> distribution_unif (0.0,Lmax);
-	std::normal_distribution<double> distribution_normal (0.0,Delta);
-*/
-
-
-/*      
-//This was the previous code, directly from Python. This does not seem right with the description in Young et al. Here, we have one random vector with modulus=1, then multiply its length by Delta. The total modulus is therefore the vaalue from the normal distribution
-        double val_displacement,mv_x,mv_y,mov_x,mov_y;
-	val_displacement=distribution_normal(generator);
-        mv_x=distribution_unif(generator);
-        mv_y=distribution_unif(generator);
-        mov_x=mv_x/pow((pow(mv_x,2)+pow(mv_y,2)),0.5);
-        mov_y=mv_y/pow((pow(mv_x,2)+pow(mv_y,2)),0.5);
-        x=x+mov_x*val_displacement;
-        y=y+mov_y*val_displacement;
-*/
-
-//Here, for each component of the vector, the diffusion adds a small increment with mean=0 and standard deviation=Delta. The total modulus of the increment is therefore dependent on two draws from the normal distribution, as opposed to what happened previously 
         double d_x,d_y;
-//	d_x=distribution_normal(generator); 
 	d_x=gsl_ran_gaussian(rgslbis,Delta);
-//	d_y=distribution_normal(generator);
 	d_y=gsl_ran_gaussian(rgslbis,Delta);
         x=x+d_x;
         y=y+d_y;
