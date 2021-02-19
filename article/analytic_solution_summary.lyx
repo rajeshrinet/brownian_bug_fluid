@@ -346,7 +346,7 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\frac{\partial G}{\partial t}=\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})
+\frac{\partial G}{\partial t}=\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\label{eq:g_without_advection}
 \end{equation}
 
 \end_inset
@@ -385,7 +385,7 @@ We therefore have
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\mathcal{L}G(\boldsymbol{r},t)=2\lambda C\delta(\boldsymbol{r})
+\mathcal{L}G(\boldsymbol{r},t)=2\lambda C\delta(\boldsymbol{r})\label{eq:LG_lambda}
 \end{equation}
 
 \end_inset
@@ -420,7 +420,16 @@ where
 \end_layout
 
 \begin_layout Standard
+Let's use the Green's function H, defined with 
+\begin_inset Formula $\mathcal{L}H=\delta(\boldsymbol{r},t)=\delta(\boldsymbol{r})\delta(t)$
+\end_inset
 
+.
+ 
+\end_layout
+
+\begin_layout Standard
+By definition, we
 \family roman
 \series medium
 \shape up
@@ -433,54 +442,80 @@ where
 \uwave off
 \noun off
 \color none
-Using the Green's function theory, we know that 
+ know that 
 \begin_inset Formula $G(y)=\int H(y,s)2\lambda C\delta(s)ds$
 \end_inset
 
- where 
-\begin_inset Formula $H(y,s)=H(y-s)$
+ (where 
+\begin_inset Formula $y=(\boldsymbol{r},t)$
 \end_inset
 
- is the Green kernel (heat kernel).
- Here, y=(
-\family default
-\series bold
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-r
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-,t).
+) is a solution to Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:LG_lambda"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
- & G(\boldsymbol{r},t) & = & 2\lambda C\int_{\mathbb{R}^{2}}\int_{0}^{t}H(\boldsymbol{r}-\boldsymbol{r'},t')\delta(\boldsymbol{r'})d\boldsymbol{r}'dt'\\
-\Leftrightarrow &  & = & 2\lambda C\int_{0}^{t}H(\boldsymbol{r},t')dt'
-\end{align*}
+\begin{align}
+ & G(\boldsymbol{r},t) & = & 2\lambda C\int_{\mathbb{R}^{2}}\int_{0}^{t}H(\boldsymbol{r}-\boldsymbol{r'},t')\delta(\boldsymbol{r'})d\boldsymbol{r}'dt'\nonumber \\
+\Leftrightarrow &  & = & 2\lambda C\int_{0}^{t}H(\boldsymbol{r},t')dt'\label{eq:g_int_H}
+\end{align}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Let's substitute Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:g_int_H"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:g_without_advection"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{2}
+ & \frac{\partial}{\partial t}\left(2\lambda C\int_{0}^{t}H(\boldsymbol{r},t')dt'\right) & = & 2D2\lambda C\Delta\int_{0}^{t}H(\boldsymbol{r},t')dt'+2\lambda C\delta(\boldsymbol{r})\\
+\Leftrightarrow & \int_{0}^{t}\left(\frac{\partial H(\boldsymbol{r},t')}{\partial t'}-2D\Delta H(\boldsymbol{r},t')\right)dt' & = & \delta(\boldsymbol{r})\\
+\Leftrightarrow & \int_{0}^{t}\delta(\boldsymbol{r})\delta(t')dt' & = & \delta(\boldsymbol{r})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which is true.
+ 
 \end_layout
 
 \begin_layout Standard

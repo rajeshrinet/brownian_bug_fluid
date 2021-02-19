@@ -1,0 +1,160 @@
+%% LyX 2.3.6.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage[authoryear]{natbib}
+\onehalfspacing
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{ae,aecompl}
+\usepackage{graphicx}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\title{Analytical solution for the pair correlation function}
+\maketitle
+
+\section*{Derivation of G(r,t)}
+
+{[}finding back Eq. (2) in the original paper?{]}
+
+\begin{equation}
+\frac{\partial G}{\partial t}=2Dr^{1-d}\frac{\partial}{\partial r}\left(r^{d-1}\frac{\partial G}{\partial r}\right)+2(\lambda-\mu)G+\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\label{eq:eq_2_Young_total}
+\end{equation}
+
+We will focus on the case $d=2$ and $\lambda=\mu$, which means Eq.
+(\ref{eq:eq_2_Young_total}) can be reduced to
+
+\begin{equation}
+\frac{\partial G}{\partial t}=\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\label{eq:eq_2_Young_reduced}
+\end{equation}
+
+
+\section*{Analytical solution with advection}
+
+In the presence of advection ($\gamma\neq0$), a steady-state solution
+can be found. 
+
+\begin{align}
+ & 0 & = & \frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\nonumber \\
+\Leftrightarrow & 0 & = & 2\pi r\left(\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\right)\nonumber \\
+\Leftrightarrow & 0 & = & 2\pi\left(2D\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\gamma\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)\right)+2\pi r2\lambda C\delta(\boldsymbol{r})\label{eq:steady_state}
+\end{align}
+
+We can then integrate Eq. (\ref{eq:eq_2_Young_reduced}) over a small
+area centered on a particle, with radius $\rho$. Let us first note
+that
+
+\begin{eqnarray}
+\int_{\mathbb{R}^{2}}\delta(\boldsymbol{r})d^{2}\boldsymbol{r} & = & 1\nonumber \\
+\Leftrightarrow\int_{0}^{2\pi}\int_{0}^{\rho}\delta(\boldsymbol{r'})r'dr'd\theta & = & 1\nonumber \\
+\Leftrightarrow2\pi\int_{0}^{\rho}\delta(\boldsymbol{r'})r'dr' & = & 1\label{eq:delta_integration}
+\end{eqnarray}
+
+Using Eq. (\ref{eq:steady_state}) and (\ref{eq:delta_integration}),
+we can integrate between 0 and $\rho$, 
+
+\begin{align}
+ & 0 & = & 2\pi\left(2D\rho\frac{\partial G}{\partial r}+\gamma\rho^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\nonumber \\
+\Leftrightarrow & \frac{\partial G}{\partial r} & = & -\frac{1}{2\pi}\frac{2\lambda C}{2D\rho+\gamma\rho^{3}}\label{eq:deriv_G_r}
+\end{align}
+
+We can integrate between $\rho$ and $\infty$, knowing that $G(\infty)=C^{2}.$
+
+\begin{align}
+ & C^{2}-G(\rho) & = & -\frac{1}{2\pi}{\displaystyle \int_{\rho}^{\infty}}\frac{2\lambda C}{2Dr+\gamma r^{3}}dr\label{eq:deriv_G_r_int1}
+\end{align}
+
+Using the variable change $u=2Dr+\gamma r^{3}$, the integral is equivalent
+to $\int\frac{u'}{u}du$ 
+
+\begin{align}
+ & C^{2}-G(\rho) & = & -\frac{\lambda C}{2\pi}\frac{1}{4D}[\log(\gamma)-\log(\frac{2D}{r^{2}}+\gamma)]\label{eq:deriv_G_rint2}\\
+\Leftrightarrow & G(\rho) & = & \frac{\lambda C}{8\pi D}\log\left(\frac{2D+\gamma r^{2}}{\gamma r^{2}}\right)+C^{2}\label{eq:G_rho}
+\end{align}
+
+Finally, the pair correlation function $g=G/C^{2}$ is defined as
+
+\begin{equation}
+g=\frac{\lambda}{8\pi DC}\log\left(\frac{2D+\gamma r^{2}}{\gamma r^{2}}\right)+1
+\end{equation}
+
+
+\subsection*{Analytical solution without advection}
+
+When $U=0$, $\gamma=0$ and there is no steady solution. We can get
+back to Eq. (\ref{eq:eq_2_Young_reduced}). 
+
+\begin{equation}
+\frac{\partial G}{\partial t}=\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\label{eq:g_without_advection}
+\end{equation}
+
+Assuming an isotropic environment, this means
+
+\begin{equation}
+\frac{\partial G}{\partial t}-2D\Delta G=2\lambda C\delta(\boldsymbol{r})
+\end{equation}
+
+where $\Delta=\nabla^{2}$ is the Laplacian operator. 
+
+We therefore have 
+
+\begin{equation}
+\mathcal{L}G(\boldsymbol{r},t)=2\lambda C\delta(\boldsymbol{r})\label{eq:LG_lambda}
+\end{equation}
+
+where $\mathcal{L}$ is the linear differential operator $\partial_{t}-2D\Delta$. 
+
+Let's use the Green's function H, defined with $\mathcal{L}H=\delta(\boldsymbol{r},t)=\delta(\boldsymbol{r})\delta(t)$. 
+
+By definition, we know that $G(y)=\int H(y,s)2\lambda C\delta(s)ds$
+(where $y=(\boldsymbol{r},t)$) is a solution to Eq.(\ref{eq:LG_lambda}).
+
+\begin{align}
+ & G(\boldsymbol{r},t) & = & 2\lambda C\int_{\mathbb{R}^{2}}\int_{0}^{t}H(\boldsymbol{r}-\boldsymbol{r'},t')\delta(\boldsymbol{r'})d\boldsymbol{r}'dt'\nonumber \\
+\Leftrightarrow &  & = & 2\lambda C\int_{0}^{t}H(\boldsymbol{r},t')dt'\label{eq:g_int_H}
+\end{align}
+
+Let's substitute Eq.(\ref{eq:g_int_H}) in Eq. (\ref{eq:g_without_advection}):
+
+\begin{alignat*}{2}
+ & \frac{\partial}{\partial t}\left(2\lambda C\int_{0}^{t}H(\boldsymbol{r},t')dt'\right) & = & 2D2\lambda C\Delta\int_{0}^{t}H(\boldsymbol{r},t')dt'+2\lambda C\delta(\boldsymbol{r})\\
+\Leftrightarrow & \int_{0}^{t}\left(\frac{\partial H(\boldsymbol{r},t')}{\partial t'}-2D\Delta H(\boldsymbol{r},t')\right)dt' & = & \delta(\boldsymbol{r})\\
+\Leftrightarrow & \int_{0}^{t}\delta(\boldsymbol{r})\delta(t')dt' & = & \delta(\boldsymbol{r})
+\end{alignat*}
+
+which is true. 
+
+A solution for the Green's function using $\mathcal{L}=\partial_{t}-2D\Delta$
+in 2 dimensions is $H(r,t)=\frac{1}{4\pi2Dt}\exp(\frac{-r^{2}}{4\times2Dt})$. 
+
+$G(r,t)$ can then be computed:
+
+\begin{equation}
+G(r,t)=2\lambda C\left[\frac{E1\left(\frac{r^{2}}{8Dt'}\right)}{8D\pi}\right]_{0}^{t}\label{eq:G_r_t}
+\end{equation}
+
+where $E1$ is the exponential integral. Using $G(r,0)=C^{2}$ and
+$\lim_{x\rightarrow+\infty}E1=0$ in Eq. (\ref{eq:G_r_t}), 
+
+\begin{equation}
+G(r,t)=2\lambda C\frac{E1\left(\frac{r^{2}}{8Dt}\right)}{8D\pi}+C^{2}
+\end{equation}
+
+\begin{equation}
+\Leftrightarrow g(r,t)=\frac{2\lambda}{C}\frac{E1\left(\frac{r^{2}}{8Dt}\right)}{8D\pi}+1
+\end{equation}
+
+\end{document}
