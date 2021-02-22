@@ -10,14 +10,16 @@ This article is a reproduction of \cite{young_reproductive_2001}.
 Finding back Eq. (2) in the original paper?
 
 \begin{equation}
-\frac{\partial G}{\partial t}=2Dr^{1-d}\frac{\partial}{\partial r}\left(r^{d-1}\frac{\partial G}{\partial r}\right)+2(\lambda-\mu)G+\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\label{eq:eq_2_Young_total}
+\frac{\partial G}{\partial t}=2Dr^{1-d}\frac{\partial}{\partial r}\left(r^{d-1}\frac{\partial G}{\partial r}\right)+2(\lambda-\mu)G+\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{x})\label{eq:eq_2_Young_total}
 \end{equation}
+
+where $\boldsymbol{x}$ is the position of the particle.
 
 We will focus on the case $d=2$ and $\lambda=\mu$, which means Eq.
 (\ref{eq:eq_2_Young_total}) can be reduced to
 
 \begin{equation}
-\frac{\partial G}{\partial t}=\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\label{eq:eq_2_Young_reduced}
+\frac{\partial G}{\partial t}=\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{x})\label{eq:eq_2_Young_reduced}
 \end{equation}
 
 
@@ -27,9 +29,9 @@ In the presence of advection ($\gamma\neq0$), a steady-state solution
 can be found. 
 
 \begin{align}
-  &  \frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\nonumber & = & & 0 \\
-\Leftrightarrow & 2\pi r\left(\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\right)\nonumber & = & & 0 \\
- \Leftrightarrow  & 2\pi\left(2D\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\gamma\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)\right)+2\pi r2\lambda C\delta(\boldsymbol{r}) & = & & 0\label{eq:steady_state}
+  &  \frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{x})\nonumber & = & & 0 \\
+\Leftrightarrow & 2\pi r\left(\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{x})\right)\nonumber & = & & 0 \\
+ \Leftrightarrow  & 2\pi\left(2D\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\gamma\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)\right)+2\pi r2\lambda C\delta(\boldsymbol{x}) & = & & 0\label{eq:steady_state}
 \end{align}
 
 We can then integrate Eq. (\ref{eq:steady_state}) over a small
@@ -37,9 +39,9 @@ area centered on a particle, with radius $\rho$. Let us first note
 that
 
 \begin{align}
-& \int_{\mathbb{R}^{2}}\delta(\boldsymbol{r})d^{2}\boldsymbol{r} & & = & & 1\nonumber \\
-\Leftrightarrow & \int_{0}^{2\pi}\int_{0}^{\rho}\delta(\boldsymbol{r'})r'dr'd\theta & & = & & 1\nonumber \\
-\Leftrightarrow & 2\pi\int_{0}^{\rho}\delta(\boldsymbol{r'})r'dr' & & = & & 1\label{eq:delta_integration}
+& \int_{\mathbb{R}^{2}}\delta(\boldsymbol{x})d^{2}\boldsymbol{x} & & = & & 1\nonumber \\
+\Leftrightarrow & \int_{0}^{2\pi}\int_{0}^{\rho}\delta(r')\delta(\theta)r'dr'd\theta & & = & & 1\nonumber \\
+\Leftrightarrow & 2\pi\int_{0}^{\rho}\delta(\boldsymbol{x'})r'dr' & & = & & 1\label{eq:delta_integration}
 \end{align}
 
 Using Eq. (\ref{eq:steady_state}) and (\ref{eq:delta_integration}),
@@ -77,13 +79,13 @@ When $U=0$, $\gamma=0$ and there is no steady solution. We can get
 back to Eq. (\ref{eq:eq_2_Young_reduced}). 
 
 \begin{equation}
-\frac{\partial G}{\partial t}=\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{r})\label{eq:g_without_advection}
+\frac{\partial G}{\partial t}=\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{x})\label{eq:g_without_advection}
 \end{equation}
 
 Assuming an isotropic environment (and switching to the polar coordinate system), this means
 
 \begin{equation}
-\frac{\partial G}{\partial t}-2D\Delta G=2\lambda C\delta(\boldsymbol{r})
+\frac{\partial G}{\partial t}-2D\Delta G=2\lambda C\delta(\boldsymbol{x})
 \end{equation}
 
 where $\Delta=\nabla^{2}$ is the Laplacian operator. \\
@@ -91,27 +93,27 @@ where $\Delta=\nabla^{2}$ is the Laplacian operator. \\
 We therefore have 
 
 \begin{equation}
-\mathcal{L}G(\boldsymbol{r},t)=2\lambda C\delta(\boldsymbol{r})\label{eq:LG_lambda}
+\mathcal{L}G(\boldsymbol{x},t)=2\lambda C\delta(\boldsymbol{x})\label{eq:LG_lambda}
 \end{equation}
 
 where $\mathcal{L}$ is the linear differential operator $\partial_{t}-2D\Delta$. \\
 
-We can use the Green's function H, defined with $\mathcal{L}H=\delta(\boldsymbol{r},t)=\delta(\boldsymbol{r})\delta(t)$. \\
+We can use the Green's function H, defined with $\mathcal{L}H=\delta(\boldsymbol{x},t)=\delta(\boldsymbol{x})\delta(t)$. \\
 
 By definition, we know that $G(y)=\int H(y,s)2\lambda C\delta(s)ds$
-(where $y=(\boldsymbol{r},t)$) is a solution to Eq.(\ref{eq:LG_lambda}).
+(where $y=(\boldsymbol{x},t)$) is a solution to Eq.(\ref{eq:LG_lambda}).
 
 \begin{align}
- & G(\boldsymbol{r},t) & = & & 2\lambda C\int_{\mathbb{R}^{2}}\int_{0}^{t}H(\boldsymbol{r}-\boldsymbol{r'},t')\delta(\boldsymbol{r'})d^2\boldsymbol{r}'dt'\nonumber \\
-\Leftrightarrow &  & = &  & 2\lambda C\int_{0}^{t}H(\boldsymbol{r},t')dt'\label{eq:g_int_H}
+ & G(\boldsymbol{x},t) & = & & 2\lambda C\int_{\mathbb{R}^{2}}\int_{0}^{t}H(\boldsymbol{x}-\boldsymbol{x}',t')\delta(\boldsymbol{x}')d^2\boldsymbol{x}'dt'\nonumber \\
+\Leftrightarrow &  & = &  & 2\lambda C\int_{0}^{t}H(\boldsymbol{x},t')dt'\label{eq:g_int_H}
 \end{align}
 
 Eq.(\ref{eq:g_int_H}) can be used in Eq. (\ref{eq:g_without_advection}):
 
 \begin{alignat*}{2}
- & \frac{\partial}{\partial t}\left(2\lambda C\int_{0}^{t}H(\boldsymbol{r},t')dt'\right) & & = & & 2D2\lambda C\Delta\int_{0}^{t}H(\boldsymbol{r},t')dt'+2\lambda C\delta(\boldsymbol{r})\\
-\Leftrightarrow & \int_{0}^{t}\left(\frac{\partial H(\boldsymbol{r},t')}{\partial t'}-2D\Delta H(\boldsymbol{r},t')\right)dt' & & = & & \delta(\boldsymbol{r})\\
-\Leftrightarrow & \int_{0}^{t}\delta(\boldsymbol{r})\delta(t')dt' & & = & & \delta(\boldsymbol{r})
+ & \frac{\partial}{\partial t}\left(2\lambda C\int_{0}^{t}H(\boldsymbol{x},t')dt'\right) & & = & & 2D2\lambda C\Delta\int_{0}^{t}H(\boldsymbol{x},t')dt'+2\lambda C\delta(\boldsymbol{x})\\
+\Leftrightarrow & \int_{0}^{t}\left(\frac{\partial H(\boldsymbol{x},t')}{\partial t'}-2D\Delta H(\boldsymbol{x},t')\right)dt' & & = & & \delta(\boldsymbol{x})\\
+\Leftrightarrow & \int_{0}^{t}\delta(\boldsymbol{x})\delta(t')dt' & & = & & \delta(\boldsymbol{x})
 \end{alignat*}
 
 which is true. \\
@@ -139,5 +141,4 @@ G(r,t)=2\lambda C\frac{E1\left(\frac{r^{2}}{8Dt}\right)}{8D\pi}+C^{2}
 \section*{Results}
 
 \section*{Discussion}
-
 

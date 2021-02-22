@@ -52,7 +52,7 @@ for (u in 1:length(Utot_list)){
 	l=lm(dist~timestep[subset]) #Finally, we estimate the value of the slope
 	slope=l$coefficients[2]
 	coef_estimated=c(coef_estimated,slope)
-	plot(timestep[subset],dist,main=paste("U=",Utot_tmp,"\nslope=",format(slope,digits=3),sep=""),xlab="t",ylab="log(r)")
+	plot(timestep[subset],dist,main=eval(substitute(expression(paste("U",tau,"/2=",Utot_tmp,", ",gamma,"=",slope,sep="")),list(Utot_tmp=Utot_tmp,slope=format(slope,digits=3)))),xlab="t",ylab="log(r)")
 
 }
 
