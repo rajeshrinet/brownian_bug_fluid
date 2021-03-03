@@ -45,7 +45,7 @@ colnames(f)=c("rDelta","U","pcf")
 
 f=unique(f)
 
-plot(0.1,0.1,t="n",xlim=range(f$rDelta),ylim=c(0.01,max(f$pcf)),log="xy",xlab="r/Delta",ylab="g(r,t)-1",axes=F)
+plot(0.1,0.1,t="n",xlim=range(f$rDelta),ylim=c(0.01,max(f$pcf)),log="xy",xlab=expression(r/Delta),ylab="g(r,t)-1",axes=F)
 
 axis(1, at=log10Tck('x','major'), tcl= 0.2) # bottom
 axis(2, at=log10Tck('y','major'), tcl= 0.2) # left
@@ -84,7 +84,7 @@ f3=subset(f,U==2.5)
 lines(f3$rDelta,f3$pcf-1,lty=1,col="darkgreen",lwd=2)
 lines(f3$rDelta,G_theoretical(2.4,f3$rDelta,C_0,"3"),col="darkgreen",lty=2,lwd=2)
 
-legend("bottomleft",c('U=0','U=0.1','U=0.5','U=2.5',"Theory"),col=c("black","blue","red","darkgreen","black"),lty=c(1,1,1,1,2,2),bty="n")
+legend("bottomleft",c(expression(paste("U",tau,"/2=0",sep="")),expression(paste("U",tau,"/2=0.1",sep="")),expression(paste("U",tau,"/2=0.5",sep="")),expression(paste("U",tau,"/2=2.5",sep="")),"Analytical solution"),col=c("black","blue","red","darkgreen","black"),lty=c(1,1,1,1,2,2),bty="n",lwd=2)
 
 #Drawing the -2 line
 y1=10^7
