@@ -1,13 +1,12 @@
 
 \section*{Introduction}
 
-Phytoplankton patchiness is observed at macro (XXX) to micro (XXX) scales and has been proposed as an explanation for the maintenance of its high diversity. Due to their size, microphytoplankton organisms experience a mostly viscous environment in a laminar shear fields, with random changes in directions due to turbulence PETERS AND MARRASE. By spatially segregating species FONT MUNOZ or by enforcing niche differences BARTON, clump formation can help avoid competitive exclusion. Ecological phenomena as simple as growth and death, which occur at the microscale, interact with hydrodynamics processes and can lead to organism clumping. In this context, a better understanding of the interactions between demographic stochasticity and environmental fluctuations at fine scales could provide further explanation for the distribution of organisms in such environments. \\
+In the present work, we attempt to replicate the results of Young et al. 2001 ``Reproductive pair correlations and the clustering of organisms'' \cite{young_reproductive_2001}, which provides an analysis of the clustering of organisms in an homogeneous environment, quantified by the pair correlation function. Using an individual based model of independent, random walking particles (also called ``brownian bugs''), they show that coupling simple ecological processes such as birth and death with a basic description of a turbulent and viscous flow leads to the formation of elongated aggregates and therefore departure from the usual, homogeneous solution of the advection-diffusion-reaction equation for a large population. The failure of averaging at fine time and spatial scales could explain certain features of, e.g., planktonic communities.\\
 
-In Young et al. 2001 \cite{young_reproductive_2001}, phytoplankton individuals are modeled as independent, random walking particles (so called ``brownian bugs'') which grow by binary division and die at constant rates. Reproduction is a local process whereas death is global, which, when combined with a turbulent and viscous environment, leads to the formation of elongated aggregates. Clumping of organisms is quantified by the pair correlation function and compared to a theoretical distribution. \\
+Our first interest in this paper was mostly driven by a major ecological wonder: the so-called paradox of the plankton (Hutchinson et al. 1961), i.e. the surprising diversity of phytoplankton species competing for the same resources in a seemingly homogeneous environment. Phytoplankton is notably characterized by its patchiness at macro to micro scales (Lovejoy 2001,  Pinel-Alloul & Ghadouani 2007). The spatial distribution of organisms, and more precisely their aggregation, could explain part of their coexistence, as spatial clustering can help reduce interspecific interactions \citep{font-munoz_advection_2017} and/or enforce niche differences \citep{barton_impact_2014}. Hydrodynamics alone cannot be made responsible for fine scale clustering: due to their size, microphytoplankton organisms experience a mostly viscous environment in a laminar shear fields, with random, but homogeneous changes in directions due to turbulence \citep{peters_effects_2000}. However, ecological phenomena as simple as growth and death, which occur at the phytoplankton scale, interact with larger hydrodynamics processes and can lead to aggregates. In this context, a better understanding of the interactions between demographic stochasticity and environmental fluctuations at fine scales could provide further explanation for the distribution and coexistence of these organisms in turbulent environments. \\
 
-In this replication, we aim not only to reproduce the main results of the paper, but also to clarify and develop the mathematical background behind the main equations governing the dynamics of the model. 
+In this replication, we aim not only to replicate the main results of the paper, but also to clarify and develop the mathematical background behind the main equations governing the dynamics of the model. 
  
-
 \section*{Methods}
 
 \subsection*{Brownian bug model}
@@ -18,7 +17,7 @@ The brownian bug model is a discrete-time, individual-based model, here presente
 
 (1) The first substep is a Galton-Watson branching process. Each organism has a fixed probability ($p$) of reproducing, dying ($q$), or remaining unchanged ($1-p-q$). When an individual reproduces, a new organism appears on top of the parent. In this paper, $p=q=0.5$.
 
-(2) Diffusion is modeled as a brownian motion, i.e. $\mathbf{x'}_k(t)=\mathbf{x}(t)+\delta\mathbf{x}(t)$ where each component of $\delta\mathbf{x}(t)$ follows a Gaussian distribution $\Gaussian (0,\Delta)$ with $D=\frac{\Delta}{2\tau}$. 
+(2) Diffusion is modeled as a brownian motion, i.e. $\mathbf{x'}_k(t)=\mathbf{x}(t)+\delta\mathbf{x}(t)$ where each component of $\delta\mathbf{x}(t)$ follows a Gaussian distribution $\Gaussian (0,\Delta)$ where $D=\frac{\Delta^2}{2\tau}$ is the diffusivity. 
 
 (3) The turbulent flow governing advective stirring follows the Pierrehumbert random map.
 
@@ -28,31 +27,31 @@ The brownian bug model is a discrete-time, individual-based model, here presente
  \label{eq:pierrehumbert}
  \end{eqnarray}
 
- where $\phi(t)$ and $\theta(t)$ are random phases uniformly distributed between 0 and $2\pi$ and $k=2\pi/L$.
+ where $\phi(t)$ and $\theta(t)$ are random phases uniformly distributed between 0 and $2\pi$, $k=2\pi/L$ and $U$ is the stretching parameter. \\
  
-Unless otherwise specified, each simulation is initialized with $N_0=20 000$ particles uniformly distributed in a $1\times 1$ square and run for 1000 timesteps.
+Unless otherwise specified, each simulation is initialized with $N_0=20,000$ particles uniformly distributed in a $1\times 1$ square and run for 1000 timesteps.
  
 \subsection*{Relation with the advection-diffusion-reaction approximation} 
-The brownian bug model can be approximated by a classical advection-diffusion-reaction (ADR)
+In continuous time, the distribution of particles in conditions similar as those described in the brownian bug model can be approximated by the advection-diffusion-reaction (ADR) equation. 
 
 \begin{equation}
 \frac{dC}{dt}=D\nabla^2 C+(\lambda-\mu)C
 \label{eq:ADR}
 \end{equation}
 
-where $C$ is the organism concentration, $D$ is the diffusivity, $\lambda$ is the growth rate and $\mu$ is the death rate. When $\lambda=\mu$, the solution of eq. \ref{ADR} is $C(\mathbf{x},t)=C_0$ where $C_0$ is the initial uniform concentration. To compare the theory to the actual distribution, the brownian bug model is run without the advection component (U=0).
+where $C$ is the concentration of particles, $\lambda$ is the growth rate ($\lambda=p/\tau$)  and $\mu$ is the death rate ($\mu=q/\tau$). When $\lambda=\mu$, the solution of eq. \ref{eq:ADR} is $C(\mathbf{x},t)=C_0$ where $C_0$ is the initial uniform concentration. To compare the theory to the actual distribution, the brownian bug model is run without the advection component ($U=0$).\\
 
 To assess the effect of the turbulent motion, the model is also run without its demographic component, but with advection and diffusion.
 
 \subsection*{Pair correlation function G(r,t)}
 
-The pair correlation function (hereafter, pcf) $G(\mathbf{x}_i,\mathbf{x}_j,t)$ is defined so that $G(\mathbf{x}_i,\mathbf{x}_j,t)dA_1dA_2$ is the probability finding a pair of brownian bugs with one member is the area $dA_1$ around $\mathbf{x}_1$ and the other in the area $dA_2$ around $\mathbf{x}_2$. The radial density function $g(r,t)$ is defined as $G(\mathbf{x}_i,\mathbf{x}_j,t)=C^2g(r,t)$ with $r=|\mathbf{x}_i,\mathbf{x}_j|$. As the pair correlation disappear when $r\rightarrow\infty$, $g\rightarrow 1$.  
+The pair correlation function (hereafter, pcf) $G(\mathbf{x}_i,\mathbf{x}_j,t)$ is defined so that $G(\mathbf{x}_i,\mathbf{x}_j,t)dA_1dA_2$ is the probability finding a pair of brownian bugs with one member in the area $dA_1$ around $\mathbf{x}_1$ and the other in the area $dA_2$ around $\mathbf{x}_2$. The radial density function $g(r,t)$ is defined as $G(\mathbf{x}_i,\mathbf{x}_j,t)=C^2g(r,t)$ with $r=|\mathbf{x}_i-\mathbf{x}_j|$. As the pair correlation disappear when $r\rightarrow\infty$, $g\rightarrow 1$.  
 
-We should note here that these notations differ from usual notations XXX: pcf usually corresponds to $g$ while $G$ is defined as the pair density. We will keep the notations of \cite{young_reproductive_2001} hereafter. 
+We should note here that these notations differ from usual notations (e.g. Illian et al. 2008): pcf may correspond to $g$ while $G$ is defined as the pair density. We will keep the notations of \cite{young_reproductive_2001} hereafter. 
 
 \subsubsection*{Derivation of G(r,t)}
 
-Finding back Eq. (2) in the original paper?
+Finding back Eq. (2) in the original paper?\\	
 
 \begin{equation}
 \frac{\partial G}{\partial t}=2Dr^{1-d}\frac{\partial}{\partial r}\left(r^{d-1}\frac{\partial G}{\partial r}\right)+2(\lambda-\mu)G+\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{x})\label{eq:eq_2_Young_total}
@@ -186,9 +185,9 @@ G(r,t)=2\lambda C\frac{E1\left(\frac{r^{2}}{8Dt}\right)}{8D\pi}+C^{2}
 
 \section*{Results}
 
-We were able to reproduce the spatial distributions of brownian bugs in each case described in \cite{young_reproductive_2001}.
+We were able to reproduce the spatial distributions of brownian bugs in each case described in \cite{young_reproductive_2001}.\\
 
-We can see in Fig. \ref{fig:spatial_fig1} the clumping of organisms which show the failure of the ADR approximation at fine scales due to demographic processes. 
+We can see in Fig. \ref{fig:spatial_fig1} the clumping of organisms which illustrates the failure of the ADR approximation at fine scales due to demographic processes. Fig. \ref{fig:spatial_fig2} also show that hydrodynamics alone cannot ensure cluster formation.  
 
 \begin{figure}[H]
 \begin{center} 
@@ -205,6 +204,8 @@ We can see in Fig. \ref{fig:spatial_fig1} the clumping of organisms which show t
   \label{fig:spatial_fig2}
 \end{center}
   \end{figure}
+  
+Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical solutions of eq. \ref{eq:eq_2_Young_reduced} was the most difficult. However, we also encountered issues when computing the pair correlation functions on simulations: for large values of $r/\Delta$, the pcf was set to 0 due to sampling issue. With the same initial conditions as the previous simulations, i.e.  $N_0=20,000$ particles uniformly distributed in a $1\times 1$ square, there were too many missing values to assess the fit of the simulation to the theory. We therefore chose to increase the number of particles to $N_0=200,000$ over an area of 10. We can see on Fig. \ref{fig:pcf_Fig3} that there are still missng values but that we can confirm that simulated and analytical pcf match. 
 
 \begin{figure}[H]
 \begin{center}
@@ -219,4 +220,4 @@ We can see in Fig. \ref{fig:spatial_fig1} the clumping of organisms which show t
 %Stuff that we could discuss: scales? Pierrehumber formulation for turbulence?
 
 \section*{Acknoweldgements}
-We are very grateful to William Young for his help to go through the theoretical part of his paper. 
+We are very grateful to William Young for his help through the theoretical part of Young et al. 2001. 
