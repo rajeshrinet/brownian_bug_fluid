@@ -25,7 +25,8 @@ N_0=200000
 area=10
 C_0=N_0/area
 
-G_theoretical=function(gamma,rDelta,C_0,U="1"){
+#Theoretical value of G
+G_theoretical=function(gamma,rDelta,C_0,U="1"){ #U=0 in the absence of advection
 	tau=1
 	lambda=0.5
 	if(U!="0"){

@@ -42,7 +42,7 @@ int main()
 {
 	int i,j,t,tmp_t;
 	double a_x,a_y,phi,theta,a_n,xi,dxi,pow_min,pow_max,dpow,pow_i,pcf;
-	std::vector<basic_particle> Part_table_parent,Part_table_children; //Here, there are two populations: each parent particle has a counterpart/children, from which it has been separated by 10^(-7) at the beginning of the simulation
+	std::vector<basic_particle> Part_table_parent,Part_table_children; //Here, there are two populations: each parent particle has a counterpart/children, from which it has been separated by 10^(-7) at the beginning of the simulation. This allows us to identify easily the pairs between which we want to compute distance
 	std::vector<double> Utot_list{ 0.0, 0.1, 0.5,2.5 };
 	std::ofstream f0,f1;
 
@@ -64,7 +64,7 @@ int main()
                 f0<< Part_table_parent[i].get_yfirst()  << ";";
                 f0<< "P"  << ";";
                 f0<< Part_table_parent[i].get_firstparent()  << std::endl;
-		Part_table_children.push_back(basic_particle(a_x,a_y+pow(10,-7),a_y+pow(10,-7),i)); //Here, I am cheating. The particles should be separated by 10^-7: I only put this distance in the y axis.
+		Part_table_children.push_back(basic_particle(a_x,a_y+pow(10,-7),a_y+pow(10,-7),i)); //The particles should be separated by 10^-7: I only put this distance in the y axis.
                 f0<< Utot <<";";
                 f0<< 0 <<";";
                 f0<< Part_table_children[i].get_x()  << ';'; 

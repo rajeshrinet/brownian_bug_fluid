@@ -60,7 +60,7 @@ int p1=0,p2=0;
 {               
                 temp=Part_table.at(p2);
                 dtt2=area;
-                for (ki=-1;ki<=1;ki++) //The periodic boundary conditions require to check for every particle in the theoretical 6 squares around the one we are modeling
+                for (ki=-1;ki<=1;ki++) //The periodic boundary conditions require to check for every particle in the theoretical 8 squares around the one we are modeling
             { 
                     for (kj=-1;kj<=1;kj++)
                     {   
@@ -71,7 +71,7 @@ int p1=0,p2=0;
              }
                 
                 // squared distance computed
-                // if distance between xi and xi+dxi increment PairDens
+                // if distance between xi and xi+dxi -> increment PairDens
                 if((d2<pow(xi+dxi,2))&&(d2>pow(xi,2)))
                 {
                         iter++;
@@ -103,7 +103,7 @@ void branching_process(std::vector<basic_particle> &part_1,double proba_repro, d
 			id_to_remove.push_back(j); //Here, we just do a list of the indices we will need to remove at the end. We cannot remove them on the fly because it would modify the sequence of rows
 		}
 	}
-	for(int j=id_to_remove.size()-1;j>=0;j--) //We start to remove by the end of the table. Indeed, if we were to start by the beginning, removing row number 2 would shift all following rows (element 4 from the old table would be element 3, for example)
+	for(int j=id_to_remove.size()-1;j>=0;j--) //We remove dead individuals, starting at the end of the table. Indeed, if we were to start by the beginning, removing row number 2 would shift all following rows (element 4 from the old table would be element 3, for example)
 	{
 			part_1.erase(part_1.begin()+id_to_remove[j]);
 	}

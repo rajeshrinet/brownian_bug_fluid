@@ -9,13 +9,13 @@ colnames(f)=c("t","x","y","yfirst","first_parent")
 png("spatial_distribution_Fig1.png",width=450,height=1050)
 par(mfrow=c(3,1),cex=1.5,mar=c(0.,4.,3.,0.2),oma=c(0.,.5,.25,0.25))
 
-##Create color and parent correspondance, to keep the first y position. The color of a particle is a function of the y position of the first ancestor.
+##Create color and parent correspondance, to keep the first y position. The color of a particle is a function of the y position of the first parent.
 select_t=0
 
 yfirst=f$yfirst[f$t==select_t]
 first_parent=f$first_parent[f$t==select_t]
-table_parent=matrix(NA,length(yfirst),3) #Y, name of the parent, color
-order_yfirst = order(yfirst) 
+table_parent=matrix(NA,length(yfirst),3) #Y position, name of the parent, color
+order_yfirst = order(yfirst)
 cols=rainbow(length(yfirst))
 
 table_parent[,1]=yfirst[order_yfirst]

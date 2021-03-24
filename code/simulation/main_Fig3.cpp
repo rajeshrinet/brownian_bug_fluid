@@ -102,7 +102,7 @@ void branching_process(std::vector<basic_particle> &part_1,double proba_repro, d
 			id_to_remove.push_back(j); //Here, we just do a list of the indices we will need to remove at the end. We cannot remove them on the fly because it would modify the sequence of rows
 		}
 	}
-	for(int j=id_to_remove.size()-1;j>=0;j--) //We start to remove by the end of the table. Indeed, if we were to start by the beginning, removing row number 2 would shift all following rows (element 4 from the old table would be element 3, for example)
+	for(int j=id_to_remove.size()-1;j>=0;j--) //We start at the end of the table. Indeed, if we were to start by the beginning, removing row number 2 would shift all following rows (element 4 from the old table would be element 3, for example)
 	{
 			part_1.erase(part_1.begin()+id_to_remove[j]);
 	}
@@ -112,7 +112,7 @@ int main()
 	int i,j,t,tmp_t;
 	double a_x,a_y,phi,theta,a_n,xi,dxi,pow_min,pow_max,dpow,pow_i,pcf,C;
 	std::vector<basic_particle> Part_table,Part_table_tmp;
-//	std::vector<double> Utot_list{ 0.0, 0.1, 0.5,2.5 };
+//	std::vector<double> Utot_list{ 0.0, 0.1, 0.5,2.5 }; //The structure of the code enables lauching one simulation for all Utot. For speed purposes, though, it is preferable to launch one simulation per Utot
 	std::vector<double> Utot_list{0.0};
 	std::ofstream f0,f1;
 

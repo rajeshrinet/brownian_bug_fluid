@@ -14,7 +14,7 @@ select_t=0
 
 yfirst=f$yfirst[f$t==select_t]
 first_parent=f$first_parent[f$t==select_t]
-table_parent=matrix(NA,length(yfirst),3) #Y, name of the parent, color
+table_parent=matrix(NA,length(yfirst),3) #position on the y-axis, name of the parent, color
 order_yfirst = order(yfirst)
 cols=rainbow(length(yfirst))
 

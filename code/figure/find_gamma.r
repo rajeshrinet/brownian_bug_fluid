@@ -5,7 +5,7 @@ graphics.off()
 
 x=seq(-2*pi,2*pi,0.1)
 
-#List estimated coef with Young et al. 2001
+#List of estimated coefficients
 coef_estimated=c()
 
 pdf("gamma_for_different_Utot.pdf")
