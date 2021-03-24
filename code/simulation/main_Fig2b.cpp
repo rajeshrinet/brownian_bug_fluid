@@ -175,7 +175,7 @@ int main()
 		xi=pow(10,pow_i);
 		pow_i+=dpow;
 		C=Part_table.size()/area;
-		pcf=PairDens(xi,dxi,Part_table)/pow(Part_table.size(),2);
+		pcf=PairDens(xi,dxi,Part_table)/pow(C,2);
 		f1<<xi/Delta<<";";
 		f1<<pcf<<std::endl;
 	}
