@@ -15,9 +15,9 @@ The brownian bug model is a discrete-time, individual-based model, here presente
       x_2 
 \end{pmatrix}$ and its original position on the y-axis at $t=0$ (a child particle inherits this attribute), this last attribute being used only for representation purposes. Space is a $L\times L$ square with periodic boundary conditions. Each timestep, of duration $\tau$, is divided into three substeps: (1) demographic processes, (2) diffusion, and (3) advection. \\
 
-(1) The first substep is a Galton-Watson branching process. Each organism has a fixed probability ($p$) of reproducing, dying ($q$), or remaining unchanged ($1-p-q$). When an individual reproduces, a new organism appears on top of the parent. In this paper, $p=q=0.5$.
+(1) Demographic processes take place during the first substep. The discrete-time Markov chain of the brownian bug model can be approximated as a continuous-time spatial birth-death process (described in the Supplementary Material), also referred to in Young et al. \cite{young_reproductive_2001} as a Galton-Watson process. Each organism has a fixed probability ($p$) of reproducing, dying ($q$), or remaining unchanged ($1-p-q$). When an individual reproduces, a new organism appears on top of the parent. In this paper, $p=q=0.5$.
 
-(2) Diffusion is modeled as a brownian motion, i.e. $\boldsymbol{x'}_k(t)=\boldsymbol{x}(t)+\delta\boldsymbol{x}(t)$ where each component of $\delta\boldsymbol{x}(t)$ follows a Gaussian distribution $\Gaussian (0,\Delta)$ where $D=\frac{\Delta^2}{2\tau}$ is the diffusivity. 
+(2) Diffusion is modeled as a brownian motion, i.e. $\boldsymbol{x'}_k(t)=\boldsymbol{x}(t)+\delta\boldsymbol{x}(t)$ where each component of $\delta\boldsymbol{x}(t)$ follows a Gaussian distribution $\mathcal{N}(0,\Delta)$ where $D=\frac{\Delta^2}{2\tau}$ is the diffusivity. 
 
 (3) The turbulent flow governing advective stirring follows the Pierrehumbert random map.
 
@@ -29,25 +29,22 @@ The brownian bug model is a discrete-time, individual-based model, here presente
 
  where $\phi(t)$ and $\theta(t)$ are random phases uniformly distributed between 0 and $2\pi$, $k=2\pi/L$ (in the rest of the paper, we use $k=2\pi$) and $U$ is the stretching parameter. \\
  
-Unless otherwise specified, each simulation is initialized with $N_0=20,000$ particles uniformly distributed in a $1\times 1$ square and run for 1000 timesteps.
+Unless otherwise specified, each simulation is initialized with $N_0=20,000$ particles uniformly distributed in a $1\times 1$ square and run for 1000 timesteps. 
  
-\subsection*{Relation with the advection-diffusion-reaction approximation} 
-In continuous time, the distribution of particles in conditions similar as those described in the brownian bug model can be approximated by the advection-diffusion-reaction (ADR) equation. 
-
-\begin{equation}
-\frac{dC}{dt}=D\nabla^2 C+(\lambda-\mu)C
-\label{eq:ADR}
-\end{equation}
-
-where $C$ is the concentration of particles, $\lambda$ is the growth rate ($\lambda=p/\tau$)  and $\mu$ is the death rate ($\mu=q/\tau$). When $\lambda=\mu$, the solution of eq. \ref{eq:ADR} is $C(\boldsymbol{x},t)=C_0$ where $C_0$ is the initial uniform concentration. To compare this theoretical distribution to the actual distribution, the brownian bug model is run without the advection component ($U=0$).\\
-
-To assess the effect of the turbulent motion, the model is also run without its demographic component, but with advection and diffusion.
-
+% \subsection*{Relation with the advection-diffusion-reaction approximation} 
+% In continuous time, the distribution of particles in conditions similar as those described in the brownian bug model can be approximated by the advection-diffusion-reaction (ADR) equation. 
+% 
+% \begin{equation}
+% \frac{dC}{dt}=D\nabla^2 C+(\lambda-\mu)C
+% \label{eq:ADR}
+% \end{equation}
+% 
+% where $C$ is the concentration of particles, $\lambda$ is the growth rate ($\lambda=p/\tau$)  and $\mu$ is the death rate ($\mu=q/\tau$). When $\lambda=\mu$, the solution of eq. \ref{eq:ADR} is $C(\boldsymbol{x},t)=C_0$ where $C_0$ is the initial uniform concentration. To compare this theoretical distribution to the actual distribution, the brownian bug model is run without the advection component ($U=0$). While the brownian bug model is a discrete-time model, we consider $\tau \leftarrow 0.1$. \\
+% 
+% To assess the effect of the turbulent motion, the model is also run without its demographic component, but with advection and diffusion.
 \subsection*{Pair correlation function G(r,t)}
 
-The pair correlation function (hereafter, pcf) $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)$ is defined so that $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)dA_1dA_2$ is the probability finding a pair of brownian bugs with one member in the area $dA_1$ around $\boldsymbol{x}_1$ and the other in the area $dA_2$ around $\boldsymbol{x}_2$. The radial density function $g(r,t)$ is defined as $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)=C^2g(r,t)$ with $r=|\boldsymbol{x}_i-\boldsymbol{x}_j|$. As the pair correlation disappear when $r\rightarrow\infty$, $g\rightarrow 1$.  
-
-We should note here that these notations differ from usual notations (see, e.g., \cite{illian2008statistical}): pcf may correspond to $g$ while $G$ is defined as the pair density. We will keep the notations of \cite{young_reproductive_2001} hereafter. 
+The pair density function $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)$ is defined so that $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)dA_1dA_2$ is the probability finding a pair of brownian bugs with one member in the area $dA_1$ around $\boldsymbol{x}_1$ and the other in the area $dA_2$ around $\boldsymbol{x}_2$. $G(\boldsymbol{r},t)$ is actually called the pair correlation function in \cite{young_reproductive_2001}. The radial density function $g(r,t)$ is defined as $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)=C^2g(r,t)$ with $r=|\boldsymbol{x}_i-\boldsymbol{x}_j|$. As the pair correlation disappear when $r\rightarrow\infty$, $g\rightarrow 1$.  
 
 \subsubsection*{Derivation of G(r,t)}
 
@@ -100,7 +97,7 @@ we can integrate between 0 and $\rho$,
 Eq. (\ref{eq:deriv_G_r}) can now be integrated between $\rho$ and $\infty$, knowing that $G(\infty)=C^{2}.$
 
 \begin{equation}
- & C^{2}-G(\rho) & = & -\frac{1}{2\pi}{\displaystyle \int_{\rho}^{\infty}}\frac{2\lambda C}{2Dr+\gamma r^{3}}dr\label{eq:deriv_G_r_int1}
+ C^{2}-G(\rho) = -\frac{1}{2\pi}{\displaystyle \int_{\rho}^{\infty}}\frac{2\lambda C}{2Dr+\gamma r^{3}}dr\label{eq:deriv_G_r_int1}
 \end{equation}
 
 Using the variable change $u=2Dr+\gamma r^{3}$, the integral is equivalent
@@ -155,11 +152,11 @@ By definition, we know that $G(y)=\int H(y,s)2\lambda C\delta(s)ds$
 
 Eq.(\ref{eq:g_int_H}) can be used in Eq. (\ref{eq:g_without_advection}):
 
-\begin{alignat*}{2}
+\begin{alignat}{3}
  & \frac{\partial}{\partial t}\left(2\lambda C\int_{0}^{t}H(\boldsymbol{x},t')dt'\right) & & = & & 2D2\lambda C\Delta\int_{0}^{t}H(\boldsymbol{x},t')dt'+2\lambda C\delta(\boldsymbol{x})\\
 \Leftrightarrow & \int_{0}^{t}\left(\frac{\partial H(\boldsymbol{x},t')}{\partial t'}-2D\Delta H(\boldsymbol{x},t')\right)dt' & & = & & \delta(\boldsymbol{x})\\
 \Leftrightarrow & \int_{0}^{t}\delta(\boldsymbol{x})\delta(t')dt' & & = & & \delta(\boldsymbol{x})
-\end{alignat*}
+\end{alignat}
 
 which is true. \\
 
@@ -169,25 +166,25 @@ in 2 dimensions is $$H(r,t)=\frac{1}{4\pi2Dt}\exp(\frac{-r^{2}}{4\times2Dt})$$.
 $G(r,t)$ can then be computed:
 
 \begin{equation}
-G(r,t)=2\lambda C\left[\frac{E1\left(\frac{r^{2}}{8Dt'}\right)}{8D\pi}\right]_{0}^{t}\label{eq:G_r_t}
+G(r,t)=2\lambda C\left[\frac{E_1 \left(\frac{r^{2}}{8Dt'}\right)}{8D\pi}\right]_{0}^{t}\label{eq:G_r_t}
 \end{equation}
 
-where $E1$ is the exponential integral. Using $G(r,0)=C^{2}$ and
-$\lim_{x\rightarrow+\infty}E1=0$ in Eq. (\ref{eq:G_r_t}), 
+where $E_1$ is the exponential integral. Using $G(r,0)=C^{2}$ and
+$\lim_{x\rightarrow+\infty}E_1=0$ in Eq. (\ref{eq:G_r_t}), 
 
 \begin{equation}
-G(r,t)=2\lambda C\frac{E1\left(\frac{r^{2}}{8Dt}\right)}{8D\pi}+C^{2}
+G(r,t)=2\lambda C\frac{E_1\left(\frac{r^{2}}{8Dt}\right)}{8D\pi}+C^{2}
 \end{equation}
 
 \begin{equation}
-\Leftrightarrow g(r,t)=\frac{2\lambda}{C}\frac{E1\left(\frac{r^{2}}{8Dt}\right)}{8D\pi}+1
+\Leftrightarrow g(r,t)=\frac{2\lambda}{C}\frac{E_1\left(\frac{r^{2}}{8Dt}\right)}{8D\pi}+1
 \end{equation}
 
 \section*{Results}
 
 We were able to reproduce the spatial distributions of brownian bugs in each case described in \cite{young_reproductive_2001}.\\
 
-We can see in Fig. \ref{fig:spatial_fig1} the clumping of organisms which illustrates the failure of the ADR approximation at small scales due to demographic processes. Fig. \ref{fig:spatial_fig2} also show that hydrodynamics alone cannot ensure cluster formation.  
+In Fig. \ref{fig:spatial_fig1}, the model has been run without the advection component and we can see the clumping of organisms due to demographic processes. In Fig. \ref{fig:spatial_fig2}, the model has been run without its demographic component, but with advection and diffusion, confirming that hydrodynamics alone cannot ensure cluster formation.  
 
 \begin{figure}[H]
 \begin{center} 
