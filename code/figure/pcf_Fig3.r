@@ -41,7 +41,8 @@ G_theoretical=function(gamma,rDelta,C_0,U="1"){ #U=0 in the absence of advection
 
 pdf("pcf_per_Utot_dx10m8.pdf",width=10,height=7.5)
 par(mfrow=c(1,2),mar=c(4,4.5,1,1))
-f=read.table('../simulation/pcf_particle_Fig3_dx10m8_big_area_0.txt',sep=";",header=F,dec=".")
+#f=read.table('../simulation/pcf_particle_Fig3_dx10m8_big_area_0.txt',sep=";",header=F,dec=".")
+f=read.table('../simulation/pcf_variable_dx_U0.txt',sep=";",header=F,dec=".")
 colnames(f)=c("rDelta","U","pcf")
 
 f=unique(f)
@@ -58,7 +59,7 @@ print("1")
 #U=0
 f0=subset(f,U==0)
 lines(f0$rDelta,f0$pcf-1,lty=1,col="black",lwd=2)
-lines(f0$rDelta,G_theoretical(0.0,f0$rDelta,C_0,"0"),col="black",lty=2,lwd=2)
+lines(f0$rDelta,G_theoretical(0.0,f0$rDelta,9560/10,"0"),col="black",lty=2,lwd=2)
 
 
 f=read.table('../simulation/pcf_particle_Fig3_dx10m8_big_area_0p1.txt',sep=";",header=F,dec=".")

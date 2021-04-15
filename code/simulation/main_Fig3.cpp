@@ -21,7 +21,7 @@ extern const double Delta=pow(10,-7); //diffusion
 extern const double Lmax=pow(10,0.5); //size of the grid
 extern const double area=Lmax*Lmax; //size of the grid
 extern const double k=2*pi;// We do not divide by Lmax, i.e. we do not change the wavenumber even though Lmax changes 
-extern const int size_pop=200000; //initial number of particles
+extern const int size_pop=10000; //initial number of particles
 extern const int tmax=1000; //length of the simulation
 extern const double proba_death=0.5; //Death and birth probability
 extern const double proba_repro=0.5;
@@ -109,8 +109,8 @@ void branching_process(std::vector<basic_particle> &part_1,double proba_repro, d
 } 
 int main()
 {
-	int i,j,t,tmp_t;
-	double a_x,a_y,phi,theta,a_n,xi,dxi,pow_min,pow_max,dpow,pow_i,pcf,C;
+	int i,j,t,tmp_t,nb_div;
+	double a_x,a_y,phi,theta,a_n,xi,dxi,pow_min,pow_max,dpow,pow_i,pcf,C,xi_min,xi_max;
 	std::vector<basic_particle> Part_table,Part_table_tmp;
 //	std::vector<double> Utot_list{ 0.0, 0.1, 0.5,2.5 }; //The structure of the code enables lauching one simulation for all Utot. For speed purposes, though, it is preferable to launch one simulation per Utot
 	std::vector<double> Utot_list{0.0};
@@ -118,10 +118,15 @@ int main()
 
 	dxi=pow(10,-8);
 	pow_min=-1+log10(Delta);pow_max=5.5+log10(Delta); //These are the limits in Fig. 3 of Young et al. 2001
-	dpow=0.25;
-
+	dpow=1;
+	xi_min=pow(10,-8);
+	xi_max=1;
+	xi=xi_min;
+	nb_div=10;
+	
 	//Open the file in which we will have the x, y, parent of each particle
-	f1.open("pcf_particle_Fig3_dx10m8_big_area_0.txt");
+	f0.open("nb_species.txt");
+	f1.open("pcf_variable_dx_U0.txt");
 
 	for (double Utot : Utot_list) 
 	{
@@ -155,20 +160,29 @@ int main()
 
 	//End of the simulation
 	pow_i=pow_min;
+	C=Part_table.size()/area;
 	while (pow_i<pow_max)
+//	while (xi<xi_max)
 	{
-		printf("pow %lg\n",pow_i);
 		xi=pow(10,pow_i);
-		pow_i+=dpow;
-		C=Part_table.size()/area;
-		pcf=PairDens(xi,dxi,Part_table)/(pow(C,2));
-		f1<<xi/Delta<<";";
-		f1<<Utot<<";";
-		f1<<pcf<<std::endl;
+//		dxi=min(pow(10,pow_i),0.001);
+		dxi=pow(10,pow_i);
+		for(i=0;i<nb_div;i++){
+			std::cout<<"xi "<<xi<<std::endl;
+//		pow_i+=dpow;
+			pcf=PairDens(xi,dxi,Part_table)/(pow(C,2));
+			f1<<xi/Delta<<";";
+			f1<<Utot<<";";
+			f1<<pcf<<std::endl;
+			xi=xi+dxi;
+		}
+		pow_i=pow_i+dpow;
 	}
+	f0<<Utot<<";"<<Part_table.size();
 	 Part_table= std::vector<basic_particle>(); //Deallocate, reinitialize
 	} //End loop on Utot
 	f1.close();
+	f0.close();
 	return 0;
 }
 
