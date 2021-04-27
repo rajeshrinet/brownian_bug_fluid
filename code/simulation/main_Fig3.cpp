@@ -21,7 +21,7 @@ extern const double Delta=pow(10,-7); //diffusion
 extern const double Lmax=pow(10,0.5); //size of the grid
 extern const double area=Lmax*Lmax; //size of the grid
 extern const double k=2*pi;// We do not divide by Lmax, i.e. we do not change the wavenumber even though Lmax changes 
-extern const int size_pop=10000; //initial number of particles
+extern const int size_pop=20000; //initial number of particles
 extern const int tmax=1000; //length of the simulation
 extern const double proba_death=0.5; //Death and birth probability
 extern const double proba_repro=0.5;
@@ -110,7 +110,7 @@ void branching_process(std::vector<basic_particle> &part_1,double proba_repro, d
 int main()
 {
 	int i,j,t,tmp_t,nb_div;
-	double a_x,a_y,phi,theta,a_n,xi,dxi,pow_min,pow_max,dpow,pow_i,pcf,C,xi_min,xi_max;
+	double a_x,a_y,phi,theta,a_n,xi,dxi,pow_min,pow_max,dpow,pow_i,pcf,C;
 	std::vector<basic_particle> Part_table,Part_table_tmp;
 //	std::vector<double> Utot_list{ 0.0, 0.1, 0.5,2.5 }; //The structure of the code enables lauching one simulation for all Utot. For speed purposes, though, it is preferable to launch one simulation per Utot
 	std::vector<double> Utot_list{0.0};
@@ -118,15 +118,11 @@ int main()
 
 	dxi=pow(10,-8);
 	pow_min=-1+log10(Delta);pow_max=5.5+log10(Delta); //These are the limits in Fig. 3 of Young et al. 2001
-	dpow=1;
-	xi_min=pow(10,-8);
-	xi_max=1;
-	xi=xi_min;
-	nb_div=10;
+	dpow=0.1;
 	
 	//Open the file in which we will have the x, y, parent of each particle
-	f0.open("nb_species.txt");
-	f1.open("pcf_variable_dx_U0.txt");
+	f0.open("nb_individuals_dx_intervalle_tmax1000.txt");
+	f1.open("pcf_variable_dx_intervalle_U0_tmax1000.txt");
 
 	for (double Utot : Utot_list) 
 	{
@@ -141,7 +137,7 @@ int main()
 	//Run the simulation
 	for(t=0;t<=tmax;t++)
 	{
-	printf("TIME=%d\n",t);
+	std::cout<<"TIME="<<t<<std::endl;
 	//Compute the phase in x and y for the turbulent flow from Pierrehumbert. These phases are common to each particle as they correspond to a unique flow
 	phi=gsl_rng_uniform(rgslbis2)*2*pi;
 	theta=gsl_rng_uniform(rgslbis2)*2*pi;
@@ -166,16 +162,12 @@ int main()
 	{
 		xi=pow(10,pow_i);
 //		dxi=min(pow(10,pow_i),0.001);
-		dxi=pow(10,pow_i);
-		for(i=0;i<nb_div;i++){
-			std::cout<<"xi "<<xi<<std::endl;
-//		pow_i+=dpow;
-			pcf=PairDens(xi,dxi,Part_table)/(pow(C,2));
-			f1<<xi/Delta<<";";
-			f1<<Utot<<";";
-			f1<<pcf<<std::endl;
-			xi=xi+dxi;
-		}
+		dxi=pow(10,pow_i+dpow)-pow(10,pow_i);
+		std::cout<<"xi "<<xi<<std::endl;
+		pcf=PairDens(xi,dxi,Part_table)/(pow(C,2));
+		f1<<xi/Delta<<";";
+		f1<<Utot<<";";
+		f1<<pcf<<std::endl;
 		pow_i=pow_i+dpow;
 	}
 	f0<<Utot<<";"<<Part_table.size();
