@@ -21,8 +21,8 @@ extern const double Delta=pow(10,-7); //diffusion
 extern const double Lmax=pow(10,0.5); //size of the grid
 extern const double area=Lmax*Lmax; //size of the grid
 extern const double k=2*pi;// We do not divide by Lmax, i.e. we do not change the wavenumber even though Lmax changes 
-extern const int size_pop=500; //initial number of particles
-extern const int tmax=2000; //length of the simulation
+extern const int size_pop=200000; //initial number of particles
+extern const int tmax=1000; //length of the simulation
 extern const double proba_death=0.5; //Death and birth probability
 extern const double proba_repro=0.5;
 
@@ -163,19 +163,19 @@ int main()
 	std::vector<double> Utot_list{0.0};
 	std::ofstream f0,f1;
 
-	dxi=pow(10,-8);
-	//pow_min=-1+log10(Delta);pow_max=5.5+log10(Delta); //These are the limits in Fig. 3 of Young et al. 2001
-	//dpow=0.25;
-	pow_min=-10;pow_max=0; //These are the limits in Fig. 3 of Young et al. 2001
-	dpow=1.0;
+	//dxi=pow(10,-8);
+	pow_min=-1+log10(Delta);pow_max=5.5+log10(Delta); //These are the limits in Fig. 3 of Young et al. 2001
+	dpow=0.25;
+	//pow_min=-10;pow_max=0; //These are the limits in Fig. 3 of Young et al. 2001
+	//dpow=1.0;
 	int repart[11];
 	for(i=0;i<11;i++){
 		repart[i]=0;
 	}
 
 	//Open the file in which we will have the x, y, parent of each particle
-	f0.open("nb_individuals_dpow0p25_intervalle_tmax2000_U0p0_table_distance.txt");
-	f1.open("pcf_dpow0p25_tmax2000_U0p0_table_distance.txt");
+	f0.open("nb_individuals_dpow0p25_area10_tmax1000_N200000_U0p0.txt");
+	f1.open("pcf_dpow0p25_area10_tmax1000_N200000_U0p0.txt");
 
 	for (double Utot : Utot_list) 
 	{
@@ -218,7 +218,7 @@ int main()
 //		dxi=min(pow(10,pow_i),0.001);
 		dxi=pow(10,pow_i+dpow)-pow(10,pow_i);
 		std::cout<<"xi "<<xi<<std::endl;
-		std::cout<<"xi-dxi "<<xi-dxi<<std::endl;
+//		std::cout<<"xi-dxi "<<xi-dxi<<std::endl;
 		std::cout<<"xi+dxi "<<xi+dxi<<std::endl;
 		pcf=PairDens(xi,dxi,Part_table)/(pow(C,2));
 		f1<<xi<<";";
@@ -227,11 +227,11 @@ int main()
 		pow_i=pow_i+dpow;
 	}
 	f0<<Utot<<";"<<Part_table.size()<<std::endl;
-	distrib_distance(Part_table,repart);
+	//distrib_distance(Part_table,repart);
+	//for(i=0;i<11;i++){
+	//	f0<<Utot<<";"<<i<<";"<<repart[i]<<std::endl;
+	//}
 	 Part_table= std::vector<basic_particle>(); //Deallocate, reinitialize
-	for(i=0;i<11;i++){
-		f0<<Utot<<";"<<i<<";"<<repart[i]<<std::endl;
-	}
 
 	} //End loop on Utot
 
