@@ -21,24 +21,12 @@ extern const double Delta=pow(10,-7); //diffusion
 extern const double Lmax=pow(10,0.5); //size of the grid
 extern const double area=Lmax*Lmax; //size of the grid
 extern const double k=2*pi;// We do not divide by Lmax, i.e. we do not change the wavenumber even though Lmax changes 
-extern const int size_pop=200000; //initial number of particles
-extern const int tmax=1000; //length of the simulation
+extern const int size_pop=20000; //initial number of particles
+extern const int tmax=500; //length of the simulation
 extern const double proba_death=0.5; //Death and birth probability
 extern const double proba_repro=0.5;
 
 using namespace std;
-
-//Basic functions to compute the distance between two particles
-double distance(basic_particle p1, basic_particle p2)
-{
-	double x1,x2,y1,y2,dist;
-	x1=p1.get_x();
-	x2=p2.get_x();
-	y1=p1.get_y();
-	y2=p2.get_y();
-	dist=pow(x1-x2,2.0)+pow(y1-y2,2.0);
-	return dist;
-}
 
 //Compute the pair density. WARNING: this function may not be completely accurate, as it may sligthly underestimate the pair density
 double PairDens(double xi, double dxi, std::vector<basic_particle> Part_table)
@@ -69,8 +57,6 @@ int p1=0,p2=0;
                       }
              }
 
-		}	
-                
                 // squared distance computed
                 // if distance between xi and xi+dxi increment PairDens
                 if((d2<pow(xi+dxi,2))&&(d2>pow(xi,2)))
@@ -78,11 +64,13 @@ int p1=0,p2=0;
                         iter++;
                 }
               }
+                
         }
+}
         return iter/(pi*(pow(xi+dxi,2.0) - pow(xi,2.0))*area); // number of pairs between xi and xi+dxi divided by the area of the crown
 }
 
-void distrib_distance(std::vector<basic_particle> Part_table, int repart[])
+void distrib_distance(std::vector<basic_particle> Part_table, int repart[]) //This function outputs all distances between points. Should be used ONLY for small populations.
 {
 double d2,dt2,dtt2;
 int ki,kj;
@@ -160,30 +148,30 @@ int main()
 	double a_x,a_y,phi,theta,a_n,xi,dxi,pow_min,pow_max,dpow,pow_i,pcf,C;
 	std::vector<basic_particle> Part_table,Part_table_tmp;
 	//std::vector<double> Utot_list{ 0.0, 0.1, 0.5,2.5 }; //The structure of the code enables lauching one simulation for all Utot. For speed purposes, though, it is preferable to launch one simulation per Utot
-	std::vector<double> Utot_list{0.0};
+	std::vector<double> Utot_list{0.1};
 	std::ofstream f0,f1;
 
 	//dxi=pow(10,-8);
 	pow_min=-1+log10(Delta);pow_max=5.5+log10(Delta); //These are the limits in Fig. 3 of Young et al. 2001
 	dpow=0.25;
-	//pow_min=-10;pow_max=0; //These are the limits in Fig. 3 of Young et al. 2001
-	//dpow=1.0;
 	int repart[11];
 	for(i=0;i<11;i++){
 		repart[i]=0;
 	}
 
 	//Open the file in which we will have the x, y, parent of each particle
-	f0.open("nb_individuals_dpow0p25_area10_tmax1000_N200000_U0p0.txt");
-	f1.open("pcf_dpow0p25_area10_tmax1000_N200000_U0p0.txt");
+	f0.open("nb_individuals_dpow0p25_area10_tmax500_N20000_U0p1.txt");
+	f0<<"Utau/2;Nb_ind;area"<<std:endl;
+	f1.open("pcf_dpow0p25_area10_tmax500_N20000_U0p1.txt");
+	f1<<"r;Utau/2;pcf"<<std::endl;
 
 	for (double Utot : Utot_list) 
 	{
 	//Initialize
 	for(i=0; i < size_pop; i++)
 	{
-		a_x=gsl_rng_uniform(rgslbis2);
-		a_y=gsl_rng_uniform(rgslbis2);
+		a_x=gsl_rng_uniform(rgslbis2)*Lmax;
+		a_y=gsl_rng_uniform(rgslbis2)*Lmax;
 		Part_table.push_back(basic_particle(a_x,a_y,a_y,i));
 	}
 
@@ -210,26 +198,22 @@ int main()
 	//End of the simulation
 	pow_i=pow_min;
 	C=Part_table.size()/area;
-	while (pow_i<pow_max)
-//	while (xi<xi_max)
+	f0<<Utot<<";"<<Part_table.size()<<area<<std::endl;
+	while (pow_i<=pow_max)
 	{
 	
 		xi=pow(10,pow_i);
-//		dxi=min(pow(10,pow_i),0.001);
 		dxi=pow(10,pow_i+dpow)-pow(10,pow_i);
-		std::cout<<"xi "<<xi<<std::endl;
-//		std::cout<<"xi-dxi "<<xi-dxi<<std::endl;
-		std::cout<<"xi+dxi "<<xi+dxi<<std::endl;
 		pcf=PairDens(xi,dxi,Part_table)/(pow(C,2));
 		f1<<xi<<";";
 		f1<<Utot<<";";
 		f1<<pcf<<std::endl;
 		pow_i=pow_i+dpow;
 	}
-	f0<<Utot<<";"<<Part_table.size()<<std::endl;
 	//distrib_distance(Part_table,repart);
 	//for(i=0;i<11;i++){
 	//	f0<<Utot<<";"<<i<<";"<<repart[i]<<std::endl;
+	//	repart[i]=0; //after writing the right number in the file, we reset to 0 before a new simulation with a new Utot
 	//}
 	 Part_table= std::vector<basic_particle>(); //Deallocate, reinitialize
 
