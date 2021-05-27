@@ -202,19 +202,19 @@ In Fig. \ref{fig:spatial_fig1}, the model has been run without the advection com
 \end{center}
   \end{figure}
   
-Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical solutions of eq. \ref{eq:eq_2_Young_reduced} was the most difficult. However, we also encountered issues when computing the pair correlation functions on simulations: for large values of $r/\Delta$, the pcf was set to 0 due to sampling issue. With the same initial conditions as the previous simulations, i.e.  $N_0=20,000$ particles uniformly distributed in a $1\times 1$ square (the size shown in the two previous figures), there were too many missing values to assess the fit of the simulation to the theory. We therefore chose to increase the number of particles to $N_0=200,000$ over an area of 10. We can see on Fig. \ref{fig:pcf_Fig3} that there are still missng values but that we can confirm that simulated and analytical pcf match. 
+Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical solutions of eq. \ref{eq:eq_2_Young_reduced} was the most difficult. However, we also encountered issues when computing the pair correlation functions on simulations: for large values of $r/\Delta$, the pcf was set to 0 when $U=0$. Despite the missng values, that we can confirm that simulated and analytical pcf match (Fig \ref{fig:pcf_Fig3}), with a slight underestimation. The pcf also got closer to 1 than the predictions for larger values of $r$. 
 
 \begin{figure}[H]
 \begin{center}
- \includegraphics[width=0.99\textwidth]{../code/figure/pcf_per_Utot_dx10m8.pdf}
- \caption{Logarithmic (a) and linear (b) plots of $g(r,t)$ versus $r/\Delta$, with $\Delta=10^{-7}$ and $U\tau/2=0,0.1,0.5,2.5$ at $t=1000\tau$. Solide lines result from simulations, dotted lines correspond to analytical solutions and the solid grey line indicates the $r^{-2}$ scaling predicted by eq. \ref{eq:eq_2_Young_total}.}
+ \includegraphics[width=0.99\textwidth]{../code/simulation/pcf_test_Utot_modif_dx_dp.pdf}
+ \caption{Logarithmic (a) and linear (b) plots of $g(r,t)$ versus $r/\Delta$, with $\Delta=10^{-7}$ and $U\tau/2=0,0.1,0.5,2.5$ at $t=1000\tau$. Solid lines result from simulations, dotted lines correspond to analytical solutions and the solid grey line indicates the $r^{-2}$ scaling predicted by eq. \ref{eq:eq_2_Young_total}.}
   \label{fig:pcf_Fig3}
 \end{center}
   \end{figure} 
  
 \section*{Discussion}
 
-We successfully replicated both the simulations and retrieved the analytical solutions of \citep{young_reproductive_2001}. Even though stochasticity prevents us from replicating exactly the same distributions as those seen in Fig. \ref{fig:spatial_fig1} and Fig. \ref{fig:spatial_fig2}, we considered the patterns to be close enough to validate the simulations. Fig. \ref{fig:pcf_Fig3} was also very close to the one shown in the article, even though we encountered some sampling issues probably due to the number of particles we used. Even though we used the number indicated in the legend of the original Fig. 3, William Young, the first author of the article confirmed that a higher number of particles might work better and might have been used for this figure.\\
+We successfully replicated both the simulations and retrieved the analytical solutions of \citep{young_reproductive_2001}. Even though stochasticity prevents us from replicating exactly the same distributions as those seen in Fig. \ref{fig:spatial_fig1} and Fig. \ref{fig:spatial_fig2}, we considered the patterns to be close enough to validate the simulations. Fig. \ref{fig:pcf_Fig3} was also very close to the one shown in the article, despite a slight underestimation.\\
 
 The most challenging part of the replication was not actually to replicate the results, but to find the analytical expression of the pair density function $G(r,t)$. In the absence of additional explanations regarding both the derivation and the solution for this function, we could not compute the analytical solutions shown in Fig. \ref{fig:pcf_Fig3}. William Young helped us find back these solutions, with quick and frequent feedbacks. We hope that the additional details on the theory will help the reader through the article. \\
 
