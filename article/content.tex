@@ -1,11 +1,11 @@
 
 \section*{Introduction}
 
-In the present work, we attempt to replicate the results of Young et al. 2001 ``Reproductive pair correlations and the clustering of organisms'' \cite{young_reproductive_2001}, an analysis of the clustering of organisms in an homogeneous environment mimicking marine turbulence. Using an individual-based model of independent, random-walking particles (also called ``brownian bugs''), they show that simple ecological processes such as birth and death in a turbulent and viscous flow leads to the formation of elongated aggregates and therefore departure from the usual, homogeneous solution of the advection-diffusion-reaction equation for a large population. This could explain the observed patchiness of communities such as the phytoplankton. \\
+In the present work, we attempt to replicate the results of Young et al. 2001 ``Reproductive pair correlations and the clustering of organisms'' \cite{young_reproductive_2001}, an analysis of the formation of aggregates in an homogeneous environment mimicking marine turbulence. Using an individual-based model of independent, random-walking particles (also called ``brownian bugs''), they show that simple ecological processes such as birth and death in a turbulent and viscous flow leads to the formation of elongated clusters and therefore departure from the usual, homogeneous solution of the advection-diffusion-reaction equation for a large population. This could explain the observed patchiness of communities such as the phytoplankton. \\
 
 Our first interest in this paper was mostly driven by a major ecological question: the so-called paradox of the plankton \citep{hutchinson_paradox_1961}, i.e. the surprising diversity of phytoplankton species competing for the same resources in a seemingly homogeneous environment. Aggregation of phytoplanktonic organisms, observed at macro- to micro-scales \citep{lovejoy_universal_2001,pinel2007spatial}, could explain part of their coexistence, as spatial clustering can help reduce interspecific interactions \citep{font-munoz_advection_2017} and/or allow species to benefit from different organic substrates \citep{seymour_resource_2009}. Due to their size, microphytoplankton organisms experience a mostly viscous environment in a laminar shear fields, with random, but homogeneous changes in directions due to turbulence \citep{peters_effects_2000}. Ecological phenomena as simple as growth and death, which occur at the phytoplankton scale, interact with these hydrodynamics processes and can lead to aggregates. In this context, a better understanding of the interactions between demographic stochasticity and environmental fluctuations at small scales could provide further explanation for the distribution and coexistence of these organisms in turbulent environments. \\
 
-In this replication, we aim not only to replicate the main results of the paper, but also to clarify and develop the mathematical background behind the main equations governing the dynamics of the model. 
+In this replication, we aim not only to replicate the main results of the paper, but also to clarify and develop the mathematical background behind the main equations governing the dynamics of the model, with the key inputs from our co-author (and first author of the original paper), William Young. 
  
 \section*{Methods}
 
@@ -15,7 +15,7 @@ The brownian bug model is a discrete-time, individual-based model, here presente
       x_2 
 \end{pmatrix}$ and its original position on the y-axis at $t=0$ (a child particle inherits this attribute), this last attribute being used only for representation purposes. Space is a $L\times L$ square with periodic boundary conditions. Each timestep, of duration $\tau$, is divided into three substeps: (1) demographic processes, (2) diffusion, and (3) advection. \\
 
-(1) Demographic processes take place during the first substep. The discrete-time Markov chain of the brownian bug model can be approximated as a continuous-time spatial birth-death process (described in the Supplementary Material), also referred to in Young et al. \cite{young_reproductive_2001} as a Galton-Watson process. Each organism has a fixed probability ($p$) of reproducing, dying ($q$), or remaining unchanged ($1-p-q$). When an individual reproduces, a new organism appears on top of the parent. In this paper, $p=q=0.5$.
+(1) Demographic processes take place during the first substep. The discrete-time Markov chain of the brownian bug model can be approximated as a continuous-time spatial birth-death process (described in the Supplementary Material), also referred to in Young et al. \cite{young_reproductive_2001} as a Galton-Watson process. Each organism has a fixed probability ($p$) of reproducing, dying ($q$), or remaining unchanged ($1-p-q$). When an individual reproduces, a new organism appears on top of the parent. In the following, $p=q=0.5$.
 
 (2) Diffusion is modeled as a brownian motion, i.e. $\boldsymbol{x'}_k(t)=\boldsymbol{x}(t)+\delta\boldsymbol{x}(t)$ where each component of $\delta\boldsymbol{x}(t)$ follows a Gaussian distribution $\mathcal{N}(0,\Delta)$ where $D=\frac{\Delta^2}{2\tau}$ is the diffusivity. 
 
@@ -44,15 +44,17 @@ Unless otherwise specified, each simulation is initialized with $N_0=20,000$ par
 % To assess the effect of the turbulent motion, the model is also run without its demographic component, but with advection and diffusion.
 \subsection*{Pair correlation function G(r,t)}
 
-The pair density function $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)$ is defined so that $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)dA_1dA_2$ is the probability finding a pair of brownian bugs with one member in the area $dA_1$ around $\boldsymbol{x}_1$ and the other in the area $dA_2$ around $\boldsymbol{x}_2$. $G(\boldsymbol{r},t)$ is actually called the pair correlation function in \cite{young_reproductive_2001}. The radial density function $g(r,t)$ is defined as $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)=C^2g(r,t)$ with $r=|\boldsymbol{x}_i-\boldsymbol{x}_j|$. As the pair correlation disappear when $r\rightarrow\infty$, $g\rightarrow 1$.  
+The pair density function $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)$ is defined so that $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)dA_1dA_2$ is the probability of finding a pair of brownian bugs with one member in the area $dA_1$ around $\boldsymbol{x}_1$ and the other in the area $dA_2$ around $\boldsymbol{x}_2$. $G(\boldsymbol{r},t)$ is actually called the pair correlation function in \cite{young_reproductive_2001}. The radial density function $g(r,t)$ is defined as $G(\boldsymbol{x}_i,\boldsymbol{x}_j,t)=C^2g(r,t)$ with $r=|\boldsymbol{x}_i-\boldsymbol{x}_j|$. As the pair correlation disappear when $r\rightarrow\infty$, $g\rightarrow 1$. \\
 
 \subsubsection*{Derivation of G(r,t)}
+
+All details of the derivation of $G(r,t)$ are to be found in the Supplementary Material. We finally obtain:
 
 \begin{equation}
 \frac{\partial G}{\partial t}=2Dr^{1-d}\frac{\partial}{\partial r}\left(r^{d-1}\frac{\partial G}{\partial r}\right)+2(\lambda-\mu)G+\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{x})\label{eq:eq_2_Young_total}
 \end{equation}
 
-where $\boldsymbol{x}$ is the position of the particle.\\
+where $\boldsymbol{x}$ is the position of the particle. \\
 
 We focus on the case $d=2$ and $\lambda=\mu$, which means Eq.
 (\ref{eq:eq_2_Young_total}) can be reduced to
@@ -61,11 +63,11 @@ We focus on the case $d=2$ and $\lambda=\mu$, which means Eq.
 \frac{\partial G}{\partial t}=\frac{2D}{r}\frac{\partial}{\partial r}\left(r\frac{\partial G}{\partial r}\right)+\frac{\gamma}{r}\frac{\partial}{\partial r}\left(r^{3}\frac{\partial G}{\partial r}\right)+2\lambda C\delta(\boldsymbol{x})\label{eq:eq_2_Young_reduced}
 \end{equation}
 
-The value of $\gamma$ is computed from simulations (see SI.)
+The value of $\gamma$ is computed from simulations (see Supplementary Material).
 
 \subsubsection*{Analytical solution with advection}
 
-In the presence of advection ($\gamma\neq0$), a steady-state solution
+The analytical solutions of $G(r,t)$ with and without advection could only be found with the indications of WY. In the presence of advection ($\gamma\neq0$), a steady-state solution
 can be found. 
 
 \begin{align}
@@ -184,12 +186,12 @@ G(r,t)=2\lambda C\frac{E_1\left(\frac{r^{2}}{8Dt}\right)}{8D\pi}+C^{2}
 
 We were able to reproduce the spatial distributions of brownian bugs in each case described in \cite{young_reproductive_2001}.\\
 
-In Fig. \ref{fig:spatial_fig1}, the model has been run without the advection component and we can see the clumping of organisms due to demographic processes. In Fig. \ref{fig:spatial_fig2}, the model has been run without its demographic component, but with advection and diffusion, confirming that hydrodynamics alone cannot ensure cluster formation.  
+In Fig. \ref{fig:spatial_fig1}, the model has been run without the advection component and we can see the clumping of organisms due to demographic processes. In Fig. \ref{fig:spatial_fig2} a), the model has been run without its demographic component, but with advection and diffusion, confirming that hydrodynamics alone cannot ensure cluster formation, while in Fig.  \ref{fig:spatial_fig2} b), all processes are taken into account, in which case organisms form aggregates.
 
 \begin{figure}[H]
 \begin{center} 
  \includegraphics[width=0.49\textwidth]{../code/figure/spatial_distribution_Fig1.png}
-  \caption{Distribution of brownian bugs at different times in a simulation with $\Delta=10^{-3}$ and $U=0$: initial conditions with a Poisson spatial distribution (a), $t=100\tau$ (b) and $t=1000\tau$ (c). Each particle is identified by a color which corresponds to the initial position on the y axis of its ancestor at t=0.}
+  \caption{Distribution of brownian bugs at different times in a simulation with $\Delta=10^{-3}$ and $U=0$: initial conditions with a Poisson spatial distribution (a), $t=100\tau$ (b) and $t=1000\tau$ (c). Each particle is identified by a color which corresponds to the initial position on the y-axis of its ancestor at $t=0$.}
   \label{fig:spatial_fig1}
 \end{center}
   \end{figure}
@@ -197,12 +199,12 @@ In Fig. \ref{fig:spatial_fig1}, the model has been run without the advection com
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=0.49\textwidth]{../code/figure/spatial_distribution_Fig2.png}
-  \caption{Distribution of brownian bugs with different processes in a simulation with $\Delta=10^{-3}$ and $U\tau/2=0.1$: without demographic processes at $t=30\tau$ (a), and with demographic processes $t=1000\tau$ (b). Each particle is identified by a color which corresponds to the initial position on the y axis of its ancestor at t=0.}
+  \caption{Distribution of brownian bugs with different processes in a simulation with $\Delta=10^{-3}$ and $U\tau/2=0.1$: without demographic processes at $t=30\tau$ (a), and with demographic processes at $t=1000\tau$ (b). Each particle is identified by a color which corresponds to the initial position on the y-axis of its ancestor at t=0.}
   \label{fig:spatial_fig2}
 \end{center}
   \end{figure}
   
-Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical solutions of eq. \ref{eq:eq_2_Young_reduced} was the most difficult. However, we also encountered issues when computing the pair correlation functions on simulations: for large values of $r/\Delta$, the pcf was set to 0 when $U=0$. Despite the missng values, that we can confirm that simulated and analytical pcf match (Fig \ref{fig:pcf_Fig3}), with a slight underestimation. The pcf also got closer to 1 than the predictions for larger values of $r$. 
+Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical solutions of eq. \ref{eq:eq_2_Young_reduced} could hardly be done without the inputs of WY. However, we also encountered issues when computing the pair correlation functions on simulations: for large values of $r/\Delta$, the pcf was set to 0 when $U=0$. Despite the missing values, we can confirm that simulated and analytical pcf match (Fig \ref{fig:pcf_Fig3}), with a slight underestimation by the simulations. The pcf also got closer to 1 than the predictions for larger values of $r$. 
 
 \begin{figure}[H]
 \begin{center}
@@ -214,13 +216,13 @@ Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical 
  
 \section*{Discussion}
 
-We successfully replicated both the simulations and retrieved the analytical solutions of \citep{young_reproductive_2001}. Even though stochasticity prevents us from replicating exactly the same distributions as those seen in Fig. \ref{fig:spatial_fig1} and Fig. \ref{fig:spatial_fig2}, we considered the patterns to be close enough to validate the simulations. Fig. \ref{fig:pcf_Fig3} was also very close to the one shown in the article, despite a slight underestimation.\\
+We successfully retrieved both the simulations and analytical solutions of \citep{young_reproductive_2001}. Even though stochasticity prevents us from replicating exactly the same distributions as those seen in Fig. \ref{fig:spatial_fig1} and Fig. \ref{fig:spatial_fig2}, we considered the patterns to be close enough to validate the simulations. Fig. \ref{fig:pcf_Fig3} was also very close to the one shown in the article, despite a slight underestimation.\\
 
-The most challenging part of the replication was not actually to replicate the results, but to find the analytical expression of the pair density function $G(r,t)$. In the absence of additional explanations regarding both the derivation and the solution for this function, we could not compute the analytical solutions shown in Fig. \ref{fig:pcf_Fig3}. William Young helped us find back these solutions, with quick and frequent feedbacks. We hope that the additional details on the theory will help the reader through the article. \\
+The most challenging part of the replication was not actually to replicate the results, but to find the analytical expression of the pair density function $G(r,t)$. WY provided the necessary information to retrieve the analytical solutions shown in Fig. \ref{fig:pcf_Fig3}. We hope that the additional details on the theory will help the reader through both the original and replication articles. \\
 
-The original paper was not strongly quantitative; we thus wondered about the time and spatial scales that could be used for a realistic phytoplankton model. The length of the square side, $L$, is defined as the Kolmogorv scale, that is the scale at which viscosity starts dominating turbulence. In the ocean, this value oscillates between 1 and 10 mm \citep{barton_impact_2014} (which corresponds to the value which was given by William Young, i.e. 1 cm). If we consider a phytoplankton doubling rate of 0.5-1 d$^{-1}$ \citep{bissinger_predicting_2008}, $p=0.5$ means that $\tau=0.25 - 0.5$ d. In this case, assuming we can write $U\tau/2=0.1L$ (the value used in Fig. \ref{fig:spatial_fig2}), $U\approx 5.5$ $10^{-5}$ cm.s$^{-1}$, which seems very low for the oceanic current (around 1-10 cm.s$^{-1}$ near the coast in \cite{font-munoz_advection_2017}, similar in the North Atlantic Ocean \citep{flatau_north_2003}). We should therefore have a lower reproduction probability $p$, if we wanted to keep the values of the other parameters. The diffusion coefficient can be hard to approximate. Brostr\"om \citep{brostrom_advection_2002} suggests a value of $10^{-8}$ m$^{2}$.s$^{-1}$, which would lead to $\Delta \approx 10^{-4}$. This is much higher from the value used in Fig. \ref{fig:pcf_Fig3} (10$^{-7}$) but only one order of magnitude lower than the value used in Fig. \ref{fig:spatial_fig1} and Fig. \ref{fig:spatial_fig2}. A thorough discussion of the parameters is therefore necessary before extrapolating these results to real phytoplanktoni systems. \\
+The original paper was not strongly quantitative; we thus wondered about the time and spatial scales that could be used for a realistic phytoplankton model. The length of the square side, $L$, is defined as the Kolmogorov scale, that is the scale at which viscosity starts dominating turbulence. In the ocean, this value oscillates between 1 and 10 mm \citep{barton_impact_2014} (which corresponds to the value which was indicated by WY, i.e. 1 cm). If we consider a phytoplankton doubling rate of 0.5-1 d$^{-1}$ \citep{bissinger_predicting_2008}, $p=0.5$ means that $\tau=0.25 - 0.5$ d. In this case, assuming we can write $U\tau/2=0.1L$ (the value used in Fig. \ref{fig:spatial_fig2}), $U\approx 5.5$ $10^{-5}$ cm.s$^{-1}$, which seems very low for the oceanic current (around 1-10 cm.s$^{-1}$ near the coast in \cite{font-munoz_advection_2017}, similar in the North Atlantic Ocean \citep{flatau_north_2003}). We should therefore have a lower reproduction probability $p$, if we wanted to keep the values of the other parameters. The diffusion coefficient can be hard to approximate. Brostr\"om \citep{brostrom_advection_2002} suggests a value of $10^{-8}$ m$^{2}$.s$^{-1}$, which would lead to $\Delta \approx 10^{-4}$. This is much higher from the value used in Fig. \ref{fig:pcf_Fig3} ($\Delta=10^{-7}$) but only one order of magnitude lower than the value used in Fig. \ref{fig:spatial_fig2}. A thorough discussion of the parameters is therefore necessary before extrapolating these results to real phytoplanktoni systems. \\
 
-As the brownian bug model is very general, a next step would be to consider similar dynamics in a 3D-model, for which the pair correlation function can be evaluated easily. Using actual concentrations of phytoplanktonic organisms, between 10$^3$ and 10$^6$ C/L, this would lead to 1 to 10$^3$ organisms if we kept $L$ = 1 cm. We may therefore need to increase the size of the considered square if doing so. With a more quantitative models, this could allow a new modeling of phytoplanktonic organisms. 
+As the brownian bug model is very general, a next step would be to consider similar dynamics in a 3D-model, for which the pair correlation function can be evaluated easily. Using actual concentrations of phytoplanktonic organisms, between 10$^3$ and 10$^6$ C/L, this would lead to 1 to 10$^3$ organisms if we kept $L$ = 1 cm. We might therefore need to increase the size of the considered square. With a more quantitative model, this could allow a new modeling of phytoplanktonic organisms. 
 
 
 
@@ -229,5 +231,5 @@ As the brownian bug model is very general, a next step would be to consider simi
 
 %Stuff that we could discuss: scales? Pierrehumber formulation for turbulence?
 
-\section*{Acknoweldgements}
-We are very grateful to William Young for his help through the theoretical part of Young et al. 2001. 
+% \section*{Acknoweldgements}
+% We are very grateful to William Young for his help through the theoretical part of Young et al. 2001. 

@@ -4,7 +4,7 @@
 
 \subsubsection*{Diffusion and birth/death processes}
 
-In this part, we aim to find back eq. (2) in \cite{young_reproductive_2001}, i.e. eq. \ref{eq:eq_2_Young_total} in our manuscript. We will first focus on the diffusion and birth/death processes, that is:
+In this part, we aim to find back eq. 2 in \cite{young_reproductive_2001}, i.e. eq. \ref{eq:eq_2_Young_total} in our manuscript. We will first focus on the diffusion and birth/death processes, that is:
 
 \begin{equation}
  \frac{\partial G}{\partial t}=2Dr^{1-d}\frac{\partial}{\partial r}\left(r^{d-1}\frac{\partial G}{\partial r}\right)+2(\lambda-\mu)G+2\lambda C\delta(\boldsymbol{x})\label{eq:eq_2_Young_diffusionbirth}
@@ -62,8 +62,6 @@ G(\boldsymbol{x},\boldsymbol{y},t)=\sum_{k=2}^{\infty}k(k-1)\int\mathcal{P}_{k}(
 \end{equation}
 
 We define the two particle distribution functions $c_{k}(\boldsymbol{x},\boldsymbol{y},t)=\int\mathcal{P}_{k}(\boldsymbol{x},\boldsymbol{y},\boldsymbol{X}_{k-2},t)d\boldsymbol{X}_{k-2}$. Note that $G(\boldsymbol{x},\boldsymbol{y},t)=\sum_{k=2}^{\infty}k(k-1)c_{k}(\boldsymbol{x},\boldsymbol{y},t)$.
-
-\newpage
 
 \textbf{\underline{Proposition}}
 
@@ -335,13 +333,13 @@ Combining all terms, we have
 
 \subsubsection*{Advection process}
 
-We here prove that, using advection only, we have
+We here prove, with clarifications from WY on the Kraichnan equations \cite{kraichnan_convection_1974}, that, using advection only, we have
 
 \begin{equation}
 \frac{\partial G}{\partial t}=\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)\label{eq:eq_2_Young_advection}
 \end{equation}
 
-We are using here the equations from Kraichnan (1974) \cite{kraichnan_convection_1974}. Let $\boldsymbol{r}(t)$
+Let $\boldsymbol{r}(t)$
 being the distance between two points as a function of time, which follows a geometric brownian motion, and $\boldsymbol{q}(t)=\log(\boldsymbol{r}(t))/\log(\boldsymbol{r}(0))$.
 Kraichnan defines $Q(\boldsymbol{q})$ as the probability distribution
 of $\boldsymbol{q}$. We have $Q=r^{d}G$. We know that (from Kraichnan
