@@ -4,7 +4,7 @@
 
 \subsubsection*{Diffusion and birth/death processes}
 
-In this part, we aim to find back eq. 2 in \cite{young_reproductive_2001}, i.e. eq. \ref{eq:eq_2_Young_total} in our manuscript. We will first focus on the diffusion and birth/death processes, that is:
+In this part, we aim to find back Eq.~2 in \cite{young_reproductive_2001}, i.e. Eq.~\ref{eq:eq_2_Young_total} in our manuscript. We will first focus on the diffusion and birth/death processes, that is:
 
 \begin{equation}
  \frac{\partial G}{\partial t}=2Dr^{1-d}\frac{\partial}{\partial r}\left(r^{d-1}\frac{\partial G}{\partial r}\right)+2(\lambda-\mu)G+2\lambda C\delta(\boldsymbol{x})\label{eq:eq_2_Young_diffusionbirth}
@@ -61,7 +61,9 @@ The pair correlation function is then:
 G(\boldsymbol{x},\boldsymbol{y},t)=\sum_{k=2}^{\infty}k(k-1)\int\mathcal{P}_{k}(\boldsymbol{x},\boldsymbol{y},\boldsymbol{X}_{k-2},t)d\boldsymbol{X}_{k-2} \label{eq:def_pairdens}
 \end{equation}
 
-We define the two particle distribution functions $c_{k}(\boldsymbol{x},\boldsymbol{y},t)=\int\mathcal{P}_{k}(\boldsymbol{x},\boldsymbol{y},\boldsymbol{X}_{k-2},t)d\boldsymbol{X}_{k-2}$. Note that $G(\boldsymbol{x},\boldsymbol{y},t)=\sum_{k=2}^{\infty}k(k-1)c_{k}(\boldsymbol{x},\boldsymbol{y},t)$.
+We define the two particle distribution functions $c_{k}(\boldsymbol{x},\boldsymbol{y},t)=\int\mathcal{P}_{k}(\boldsymbol{x},\boldsymbol{y},\boldsymbol{X}_{k-2},t)d\boldsymbol{X}_{k-2}$. Note that $G(\boldsymbol{x},\boldsymbol{y},t)=\sum_{k=2}^{\infty}k(k-1)c_{k}(\boldsymbol{x},\boldsymbol{y},t)$.\\
+
+\pagebreak
 
 \textbf{\underline{Proposition}}
 
@@ -78,7 +80,8 @@ We show that
 
 \vspace{2em}
 
-\textbf{\underline{Proof}} 
+\textbf{\underline{Proof}}
+~
 
 We write the evolution of $\mathcal{P}_{k}(\boldsymbol{X}_{k},t)$:
 
@@ -94,8 +97,8 @@ We write the evolution of $\mathcal{P}_{k}(\boldsymbol{X}_{k},t)$:
 where $\nabla_{k}^{2}=\frac{\partial^{2}}{\partial_{x_{1}}^{2}}+\frac{\partial^{2}}{\partial_{y_{1}}^{2}}+\ldots+\frac{\partial^{2}}{\partial_{x_{k}}^{2}}+\frac{\partial^{2}}{\partial_{y_{k}}^{2}}$ and $\boldsymbol{X}_{k|p}=\boldsymbol{X}_{k}$
 without $\boldsymbol{x}_{p}$. \\
 
-Here, eq. \ref{pk_diffusion} is the diffusion part of the process, 
-eq. \ref{pk_same_state} corresponds to the rate at which realizations with $k$ bugs lose a bug by mortality or gain a bug through birth,  eq. \ref{pk_death} corresponds to the rate at which realization with $k+1$ bugs lose a bug. Finally, a realization with $k$ bugs can also be produced by a birth in a realization with $k-1$ bugs. \\
+Here, Eq.~\ref{pk_diffusion} is the diffusion part of the process, 
+Eq.~\ref{pk_same_state} corresponds to the rate at which realizations with $k$ bugs lose a bug by mortality or gain a bug through birth,  Eq.~\ref{pk_death} corresponds to the rate at which realization with $k+1$ bugs lose a bug. Finally, a realization with $k$ bugs can also be produced by a birth in a realization with $k-1$ bugs. \\
 
 Using the derivation of $\mathcal{P}_{k}(\boldsymbol{X}_{k},t)$ and
 the definition of $c_{k}$, we have:
@@ -226,6 +229,7 @@ Now, we need to use $p\geq3$.
 
 Thus, $\sum_{p=3}^{k}\sum_{q\neq p}\delta(\boldsymbol{x}_{p}-\boldsymbol{x}_{q})\mathcal{P}_{k-1}d\boldsymbol{X}_{k|p}=(k-2)(k-1)c_{k-1}$.\\
 
+\pagebreak
 Finally, the birth term is
 
 \begin{equation}
@@ -255,7 +259,7 @@ In cartesian coordinates, the pair density admits the following evolution equati
 
 \textbf{\underline{Proof}} 
 
-Using the definition of $G(\boldsymbol{x},\boldsymbol{y},t)$ and eq. \ref{ck_diffusion-1}-\ref{ck_birth-1}:
+Using the definition of $G(\boldsymbol{x},\boldsymbol{y},t)$ and Eq.~\ref{ck_diffusion-1}-\ref{ck_birth-1}:
 
 \begin{subequations} 
 \begin{align}
@@ -333,7 +337,7 @@ Combining all terms, we have
 
 \subsubsection*{Advection process}
 
-We here prove, with clarifications from WY on the Kraichnan equations \cite{kraichnan_convection_1974}, that, using advection only, we have
+With clarifications from WY on the Kraichnan equations \cite{kraichnan_convection_1974}, we prove that, taking only advection into account:
 
 \begin{equation}
 \frac{\partial G}{\partial t}=\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)\label{eq:eq_2_Young_advection}
@@ -342,8 +346,7 @@ We here prove, with clarifications from WY on the Kraichnan equations \cite{krai
 Let $\boldsymbol{r}(t)$
 being the distance between two points as a function of time, which follows a geometric brownian motion, and $\boldsymbol{q}(t)=\log(\boldsymbol{r}(t))/\log(\boldsymbol{r}(0))$.
 Kraichnan defines $Q(\boldsymbol{q})$ as the probability distribution
-of $\boldsymbol{q}$. We have $Q=r^{d}G$. We know that (from Kraichnan
-and Fokker-Planck equation):
+of $\boldsymbol{q}$. We have $Q=r^{d}G$. From Kraichnan and Fokker-Planck equations, we know that:
 
 \begin{equation}
 \frac{\partial Q}{\partial t}=\gamma\frac{\partial^{2}Q}{\partial q^{2}}-\gamma d\frac{\partial Q}{\partial q}\label{eq:FokkerPlanck}
@@ -373,7 +376,7 @@ Therefore,
 
 \end{subequations}
 
-Using eq. \ref{eq:FokkerPlanck},
+Using Eq.~\ref{eq:FokkerPlanck},
 
 \begin{subequations}
 
@@ -387,7 +390,6 @@ r^{d}\frac{\partial G}{\partial t} & =\gamma r\frac{\partial}{\partial r}(r^{d+1
 
 \subsection*{Stretching parameter $\gamma$}
 
-
 $\gamma$ is computed with simulations, with the formula $r(t)\propto exp(\gamma dt)\rightarrow\frac{1}{2}ln(r(t))=\gamma t$
 if $d=2$ with $r$ being the separation between pairs of particles. $\gamma$ is estimated as the slope of $$\frac{1}{2}\left\langle ln(r(t))\right\rangle =f(t)$$
 
@@ -395,8 +397,7 @@ with $\left\langle ln(r(t))\right\rangle $ being the average obtained from 800 p
 
 $$\forall t,\left\langle ln(r(t))\right\rangle =\frac{1}{800}\sum_{p=1}^{800}ln(r(\boldsymbol{x}_{1,p}(t)-\boldsymbol{x}_{2,p}(t)))$$ 
 
-where $r(\boldsymbol{x}_{1p}(t)-\boldsymbol{x}_{2p}(t))$ is the distance between a particle $1p$ at position $\boldsymbol{x}_{1p}$ and its counterpart $2p$, initialized with $r(0)=10^{-7}\forall p$ (see
-Fig. \ref{fig:gamma_Utot} for $\gamma$ estimates).
+where $r(\boldsymbol{x}_{1p}(t)-\boldsymbol{x}_{2p}(t))$ is the distance between a particle $1p$ at position $\boldsymbol{x}_{1p}$ and its counterpart $2p$, initialized with $r(0)=10^{-7}\forall p$ (see Fig.~\ref{fig:gamma_Utot} for $\gamma$ estimates).
 
 \begin{figure}[H]
 \begin{centering}
