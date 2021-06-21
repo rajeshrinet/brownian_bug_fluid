@@ -6,8 +6,8 @@ graphics.off()
 f=read.table("../simulation/Spatial_distribution_particle_Fig1.txt",header=F,sep=";",dec='.')
 colnames(f)=c("t","x","y","yfirst","first_parent")
  
-png("spatial_distribution_Fig1.png",width=450,height=1050)
-par(mfrow=c(3,1),cex=1.5,mar=c(0.,4.,3.,0.2),oma=c(0.,.5,.25,0.25))
+png("spatial_distribution_Fig1.png",width=400,height=1150)
+par(mfrow=c(3,1),cex=1.5,mar=c(4.,4,0.,0.2),oma=c(0.,.5,3.,1))
 
 ##Create color and parent correspondance, to keep the first y position. The color of a particle is a function of the y position of the first parent.
 select_t=0
@@ -35,7 +35,7 @@ for(i in 1:length(y)){ #Plotting one point after the other
 text(-0.25,1.0,"a",xpd=T,font=2)
 
 #Now, we want the spatial distribution of each point at t=100
-par(mar=c(2.,4.,2.,0.2))
+par(mar=c(4.,4.,0.,0.2))
 select_t=100
 print(select_t)
 x=f$x[f$t==select_t]
