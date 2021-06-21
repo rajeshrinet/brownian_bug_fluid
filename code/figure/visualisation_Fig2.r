@@ -6,7 +6,7 @@ graphics.off()
 f=read.table("../simulation/Spatial_distribution_particle_Fig2a.txt",header=F,sep=";",dec='.') #Without birth or death
 colnames(f)=c("t","x","y","yfirst","first_parent")
  
-png("spatial_distribution_Fig2.png",width=450,height=900)
+png("spatial_distribution_Fig2.png",width=450,height=860)
 par(mfrow=c(2,1),cex=1.5,oma=c(0.,.5,.25,0.25))
 
 ##Create color and parent correspondance, to keep the first y position
