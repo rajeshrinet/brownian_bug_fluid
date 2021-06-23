@@ -63,8 +63,6 @@ G(\boldsymbol{x},\boldsymbol{y},t)=\sum_{k=2}^{\infty}k(k-1)\int\mathcal{P}_{k}(
 
 We define the two particle distribution functions $c_{k}(\boldsymbol{x},\boldsymbol{y},t)=\int\mathcal{P}_{k}(\boldsymbol{x},\boldsymbol{y},\boldsymbol{X}_{k-2},t)d\boldsymbol{X}_{k-2}$. Note that $G(\boldsymbol{x},\boldsymbol{y},t)=\sum_{k=2}^{\infty}k(k-1)c_{k}(\boldsymbol{x},\boldsymbol{y},t)$.\\
 
-\pagebreak
-
 \textbf{\underline{Proposition}}
 
 We show that
@@ -229,7 +227,6 @@ Now, we need to use $p\geq3$.
 
 Thus, $\sum_{p=3}^{k}\sum_{q\neq p}\delta(\boldsymbol{x}_{p}-\boldsymbol{x}_{q})\mathcal{P}_{k-1}d\boldsymbol{X}_{k|p}=(k-2)(k-1)c_{k-1}$.\\
 
-\pagebreak
 Finally, the birth term is
 
 \begin{equation}
@@ -340,7 +337,7 @@ Combining all terms, we have
 With clarifications from WY on the Kraichnan equations \cite{kraichnan_convection_1974}, we prove that, taking only advection into account:
 
 \begin{equation}
-\frac{\partial G}{\partial t}=\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)\label{eq:eq_2_Young_advection}
+\frac{\partial G}{\partial t}=\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right). \label{eq:eq_2_Young_advection}
 \end{equation}
 
 Let $\boldsymbol{r}(t)$
@@ -360,7 +357,7 @@ We have:
 \begin{align}
 \frac{\partial Q}{\partial q} & =\frac{\partial(r^{d}G)}{\partial r}\frac{\partial r}{\partial q}\label{computedGdQ1}\\
  & =r\left(dr^{d-1}G+r^{d}\frac{\partial G}{\partial r}\right)\label{computedGdQ2}\\
- & =dr^{d}G+r^{d+1}\frac{\partial G}{\partial r}
+ & =dr^{d}G+r^{d+1}\frac{\partial G}{\partial r}.
 \end{align}
  \end{subequations}
 
@@ -383,19 +380,19 @@ Using Eq.~\ref{eq:FokkerPlanck},
 \begin{align}
 \frac{\partial(r^{d}G)}{\partial t} & =\gamma r\frac{\partial}{\partial r}(r^{d+1}\frac{\partial G}{\partial r})+\gamma dr\frac{\partial(r^{d}G)}{\partial r}-\gamma dr\frac{\partial(r^{d}G)}{\partial r}\label{computedGdQ1-1-1}\\
 r^{d}\frac{\partial G}{\partial t} & =\gamma r\frac{\partial}{\partial r}(r^{d+1}\frac{\partial G}{\partial r})\label{computedGdQ2-1-1}\\
- & =\gamma r^{1-d}\frac{\partial}{\partial r}(r^{d+1}\frac{\partial G}{\partial r})
+ & =\gamma r^{1-d}\frac{\partial}{\partial r}(r^{d+1}\frac{\partial G}{\partial r}).
 \end{align}
 
 \end{subequations}
 
 \subsection*{Stretching parameter $\gamma$}
 
-$\gamma$ is computed with simulations, with the formula $r(t)\propto exp(\gamma dt)\rightarrow\frac{1}{2}ln(r(t))=\gamma t$
-if $d=2$ with $r$ being the separation between pairs of particles. $\gamma$ is estimated as the slope of $$\frac{1}{2}\left\langle ln(r(t))\right\rangle =f(t)$$
+$\gamma$ is computed with simulations, with the formula $r(t)\propto \exp(\gamma dt)\rightarrow\frac{1}{2}\ln(r(t))=\gamma t$
+if $d=2$ with $r$ being the separation between pairs of particles. $\gamma$ is estimated as the slope of $$\frac{1}{2}\left\langle \ln(r(t))\right\rangle =f(t)$$
 
-with $\left\langle ln(r(t))\right\rangle $ being the average obtained from 800 pairs of particles. 
+with $\left\langle \ln(r(t))\right\rangle $ being the average obtained from 800 pairs of particles. 
 
-$$\forall t,\left\langle ln(r(t))\right\rangle =\frac{1}{800}\sum_{p=1}^{800}ln(r(\boldsymbol{x}_{1,p}(t)-\boldsymbol{x}_{2,p}(t)))$$ 
+$$\forall t,\left\langle \ln(r(t))\right\rangle =\frac{1}{800}\sum_{p=1}^{800}ln(r(\boldsymbol{x}_{1,p}(t)-\boldsymbol{x}_{2,p}(t)))$$ 
 
 where $r(\boldsymbol{x}_{1p}(t)-\boldsymbol{x}_{2p}(t))$ is the distance between a particle $1p$ at position $\boldsymbol{x}_{1p}$ and its counterpart $2p$, initialized with $r(0)=10^{-7}\forall p$ (see Fig.~\ref{fig:gamma_Utot} for $\gamma$ estimates).
 
