@@ -28,48 +28,7 @@ extern const double proba_repro=0.5;
 
 using namespace std;
 
-//Compute the pair density. WARNING: this function may not be completely accurate, as it may sligthly underestimate the pair density
-double PairDens_function_dx(double xi, double dxi, std::vector<basic_particle> Part_table)
-{
-double d2,dt2,dtt2;
-int ki,kj;
-basic_particle temp, current;
-int iter=0;
-int p1=0,p2=0;
-    
-    for(p1=0;p1<Part_table.size();p1++)
-{   
-    current=Part_table.at(p1);
-    // double loop (or loop on all pairs)
-    for (p2=0;p2<Part_table.size();p2++)
-{
-        if(p1!=p2)
-{               
-                temp=Part_table.at(p2);
-                dtt2=area;
-                for (ki=-1;ki<=1;ki++)
-            { 
-                    for (kj=-1;kj<=1;kj++)
-                    {   
-                        dt2 = pow((temp.get_x() - current.get_x()+ki*Lmax),2) + pow((temp.get_y() - current.get_y()+kj*Lmax),2);
-                        d2 = std::min(dtt2,dt2);
-                        dtt2 = d2;
-                      }
-             }
-
-                // squared distance computed
-                // if distance between xi and xi+dxi increment PairDens
-                if((d2<pow(xi+dxi,2))&&(d2>pow(xi,2)))
-                {
-                        iter++;
-                }
-              }
-                
-        }
-}
-        return iter/(pi*(pow(xi+dxi,2.0) - pow(xi,2.0))*area); // number of pairs between xi and xi+dxi divided by the area of the crown
-}
-
+//This function computes the values of the pair density, either deriving with regards to dx, the increment in radius, or with regards to dp, the increment of power to compute the radius, as we wanted to compare the results. PairDens values are put in the table pcf[], with the derivation wrt dx in [0] and wrt to dp in [1]
 double PairDens(double p, double dp, std::vector<basic_particle> Part_table,double pcf[])
 {
 double d2,dt2,dtt2;
@@ -115,49 +74,7 @@ double dxi=pow(10, p+dp)-pow(10,p);
 }
 
 
-double PairDens_function_dp(double p, double dp, std::vector<basic_particle> Part_table)
-{
-double d2,dt2,dtt2;
-int ki,kj;
-basic_particle temp, current;
-int iter=0;
-int p1=0,p2=0;
-double xi=pow(10, p);
-double dxi=pow(10, p+dp)-pow(10,p);
-
-    for(p1=0;p1<Part_table.size();p1++)
-{
-    current=Part_table.at(p1);
-    // double loop (or loop on all pairs)
-    for (p2=0;p2<Part_table.size();p2++)
-{
-        if(p1!=p2)
-{
-                temp=Part_table.at(p2);
-                dtt2=area;
-                for (ki=-1;ki<=1;ki++)
-            {
-                    for (kj=-1;kj<=1;kj++)
-                    {
-                        dt2 = pow((temp.get_x() - current.get_x()+ki*Lmax),2) + pow((temp.get_y() - current.get_y()+kj*Lmax),2);
-                        d2 = std::min(dtt2,dt2);
-                        dtt2 = d2;
-                      }
-             }
-                // squared distance computed
-                // if distance between xi and xi+dxi increment PairDens
-                if((d2<pow(xi+dxi,2))&&(d2>pow(xi,2)))
-                {
-                        iter++;
-                }
-              }
-        }
-}
-        return iter/(2*pi*log(10)*pow(10,2*p))*(1/dp)*(1/area); // (K(p+dp)-K(p))/dp * 1/(2pi log(10) 10^2p)
-}
-
-
-void distrib_distance(std::vector<basic_particle> Part_table, int repart[]) //This function outputs all distances between points. Should be used ONLY for small populations.
+void distrib_distance(std::vector<basic_particle> Part_table, int repart[]) //This function outputs all distances between points. Should be used ONLY for small populations, and for debugging reasons.
 {
 double d2,dt2,dtt2;
 int ki,kj;
@@ -228,18 +145,18 @@ void branching_process(std::vector<basic_particle> &part_1,double proba_repro, d
 	{
 			part_1.erase(part_1.begin()+id_to_remove[j]);
 	}
-} 
+}
+ 
 int main()
 {
 	int i,j,t,tmp_t,nb_div;
-	double a_x,a_y,phi,theta,a_n,xi,dxi,pow_min,pow_max,dpow,pow_i,pcf,pcf_2,C;
+	double a_x,a_y,phi,theta,a_n,xi,dxi,pow_min,pow_max,dpow,pow_i,C;
 	std::vector<basic_particle> Part_table,Part_table_tmp;
 	//std::vector<double> Utot_list{ 0.0, 0.1, 0.5,2.5 }; //The structure of the code enables lauching one simulation for all Utot. For speed purposes, though, it is preferable to launch one simulation per Utot
 	std::vector<double> Utot_list{2.5};
 	std::ofstream f0,f1;
 	double pcf_table[2];
 
-	//dxi=pow(10,-8);
 	pow_min=-1+log10(Delta);pow_max=5.5+log10(Delta); //These are the limits in Fig. 3 of Young et al. 2001
 	dpow=0.25;
 	int repart[11];
@@ -292,20 +209,20 @@ int main()
 	
 		xi=pow(10,pow_i);
 		dxi=pow(10,pow_i+dpow)-pow(10,pow_i);
-//		pcf=PairDens_function_dx(xi,dxi,Part_table)/(pow(C,2));
-//		pcf_2=PairDens_function_dp(pow_i,dpow,Part_table)/(pow(C,2));
 		f1<<xi<<";";
 		f1<<Utot<<";";
-//		f1<<pcf<<";"<<pcf_2<<";";
 		PairDens(pow_i,dpow,Part_table,pcf_table);
 		f1<<pcf_table[0]/pow(C,2)<<";"<<pcf_table[1]/pow(C,2)<<std::endl;
 		pow_i=pow_i+dpow;
 	}
+
+	//The part below is just here to output the repartition of distances, which should NOT be done for large populations	
 	//distrib_distance(Part_table,repart);
 	//for(i=0;i<11;i++){
 	//	f0<<Utot<<";"<<i<<";"<<repart[i]<<std::endl;
 	//	repart[i]=0; //after writing the right number in the file, we reset to 0 before a new simulation with a new Utot
 	//}
+	
 	 Part_table= std::vector<basic_particle>(); //Deallocate, reinitialize
 
 	} //End loop on Utot
