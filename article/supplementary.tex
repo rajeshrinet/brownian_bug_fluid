@@ -41,7 +41,7 @@ and $\boldsymbol{x}_{q}$ (permutation symmetry):
 The normalization is: 
 
 \begin{equation}
-\mathcal{P}_{0}(t)+\int\mathcal{P}_{1}(\boldsymbol{X}_{1},t)d\boldsymbol{x}_{1}+\int\int\mathcal{P}_{2}(\boldsymbol{X}_{1},t)d\boldsymbol{x}_{1}d\boldsymbol{x}_{2}+\ldots+\int_{\mathbb{R}^{2k}}\mathcal{P}_{k}(\boldsymbol{X}_{k},t)d\boldsymbol{X}_{k}=1
+\mathcal{P}_{0}(t)+sum_{k=1}^\infty \int_{\mathbb{R}^{2k}}\mathcal{P}_{k}(\boldsymbol{X}_{k},t)d\boldsymbol{x}_{1}\boldsymbol{x}_{2}...\boldsymbol{x}_{k}=1
 \end{equation}
 
 \vspace{1.25em}
@@ -334,7 +334,7 @@ Combining all terms, we have
 
 \subsubsection*{Advection process}
 
-With clarifications from WY on the Kraichnan equations \cite{kraichnan_convection_1974}, we prove that, taking only advection into account:
+Using the Kraichnan equations \cite{kraichnan_convection_1974}, we prove that, taking only advection into account:
 
 \begin{equation}
 \frac{\partial G}{\partial t}=\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right). \label{eq:eq_2_Young_advection}
