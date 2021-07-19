@@ -66,7 +66,7 @@ The value of $\gamma$ is computed from simulations (see Supplementary Material).
 
 \subsubsection*{Analytical solution with advection}
 
-The analytical solutions of $G(r,t)$ with and without advection could only be found with the indications of WY. In the presence of advection ($\gamma\neq0$), a steady-state solution
+CP and FB could only find the analytical solutions of $G(r,t)$ with and without advection with the indications of WY. In the presence of advection ($\gamma\neq0$), a steady-state solution
 can be found; without advection, there is no steady-state. 
 
 \begin{align}
@@ -118,7 +118,7 @@ g=\frac{\lambda}{8\pi DC}\log\left(\frac{2D+\gamma r^{2}}{\gamma r^{2}}\right)+1
 
 \subsubsection*{Analytical solution without advection}
 
-When $U=0$, $\gamma=0$ and there is no steady solution. We can get
+When $U=0$, $\gamma=0$ and there is no steady solution in 2D. We can get
 back to Eq.~\ref{eq:eq_2_Young_reduced}.
 
 \begin{equation}
@@ -187,7 +187,7 @@ We were able to reproduce the three figures of Young et al. \cite{young_reproduc
 
 In Fig. \ref{fig:spatial_fig1}, the model has been run without the advection component and we can see the clumping of organisms due to demographic processes. In Fig. \ref{fig:spatial_fig2} a), the model has been run without its demographic component, but with advection and diffusion, confirming that hydrodynamics alone cannot ensure cluster formation, while in Fig.  \ref{fig:spatial_fig2} b), advection, diffusion and demography are present, in which case organisms form aggregates.\\
   
-Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical solutions of Eq.~\ref{eq:eq_2_Young_reduced} could hardly be done without the inputs of WY. However, we also encountered issues when computing the pair correlation functions on simulations: for large values of $r/\Delta$, we observed zero values (absent pairs) of the pcf when U=0. This is a sampling effect as pcf values get very low for large distances without advection, even though we multiplied the study area by 10 to produce Fig.  \ref{fig:pcf_Fig3} and counter such effects. Despite the missing values, we can confirm that simulated and analytical pcf match (Fig. \ref{fig:pcf_Fig3}), with a slight underestimation by the simulations. The pcf also got closer to 1 than the analytical predictions for larger values of $r$. %% F: predictions -> analytical predictions? 
+Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical solutions of Eq.~\ref{eq:eq_2_Young_reduced} was difficult as they were no other equation than Eq. \ref{eq:eq_2_Young_total} in the original paper. We also encountered issues when computing the pair correlation functions on simulations: for large values of $r/\Delta$, we observed zero values (absent pairs) of the pcf when U=0. This is a sampling effect as pcf values get very low for large distances without advection, even though we multiplied the study area by 10 to produce Fig.  \ref{fig:pcf_Fig3} and counter such effects. Despite the missing values, we can confirm that simulated and analytical pcf match (Fig. \ref{fig:pcf_Fig3}), with a slight underestimation by the simulations. The pcf also got closer to 1 than the analytical predictions for larger values of $r$. %% F: predictions -> analytical predictions? 
 
 \begin{figure}[H]
 \begin{center} 
@@ -220,7 +220,7 @@ We successfully replicated both the numerical results and analytical solutions o
 
 The most challenging part of the replication was not actually to replicate the numerical results, but to find back the analytical expression of the pair density function $G(r,t)$ dynamics from first principles. How to derive such dynamics was indeed briefly explained in words in the original article, but the many intermediate steps involved (see Supplementary Material) make the additional mathematical derivations presented here worthwhile in our opinion. In addition to providing critical information to CP and FB regarding how to obtain the pair correlation dynamics, WY also communicated the required mathematical steps to find back the analytical solutions for $G(r,t)$ plotted in Fig. \ref{fig:pcf_Fig3}. We hope that the additional material on the derivation of $G(r,t)$ dynamics (as Supplementary Material) as well as the provided analytical solutions of such dynamics (now presented in the main text) will help readers through both the original and replication articles. \\
 
-The original article did not provide quantitative values exactly matching marine microbes ecology; we thus wondered about the time and spatial scales that could be used for a realistic phytoplankton model. The length of the square side, $L$, is defined roughly as the Kolmogorov scale, the scale at which viscosity starts dominating turbulence  (we use $L= 1$ cm as an upper bound). In the Batchelor-Kolmogorov regime, parent and offspring are separated by a distance lower than $k^{-1}$, where $k$ is the wavenumber for the flow. Here, we consider the smallest wavenumber corresponding to the largest length scale $L$, i.e. $k=2\pi/L$. The chosen length scale defines the Reynolds number which then allows to obtain the advection speed $U$
+The original article did not provide quantitative values exactly matching marine microbes ecology; we thus wondered about the time and spatial scales that could be used for a realistic phytoplankton model. The length of the square side, $L$, is defined roughly as the Kolmogorov scale, the scale at which viscosity starts dominating turbulence  (we use $L= 1$ cm as an upper bound). In the Batchelor-Kolmogorov regime, parent and offspring are separated by a distance lower than $k^{-1}$, where $k$ is the wavenumber for the flow. Here, we consider the smallest wavenumber corresponding to the largest length scale $L$, i.e. $k=2\pi/L$. The chosen length scale defines the Reynolds number which then allows to obtain $U$, the velocity difference between two points separated by a distance $L$. We should indeed note that $U$ corresponds to the velocity \textit{inside} a bigger eddy, not the absolute velocity of the current. 
  
 \begin{eqnarray}
  Re & = &\frac{U}{k\nu}\\
@@ -228,7 +228,7 @@ The original article did not provide quantitative values exactly matching marine
 \Leftrightarrow U & = &\frac{2\pi\nu}{L}
 \end{eqnarray}
 % 
-where $\nu=10^{-6} \text{ m}^{2}.\text{s}^{-1}$ is the kinematic viscosity for water. These numerical values lead to $U=6.3\times10^{-4} \text{ m.s}^{-1}$.\\
+where $\nu=10^{-6} \text{ m}^{2}.\text{s}^{-1}$ is the kinematic viscosity for water. These numerical values lead to $U=6.3\times10^{-4} \text{ m.s}^{-1}$. Note that U is the speed in the frame of reference of the small square area considered here, which might itself be embedded within structures moving at higher speeds in the ocean or any large waterbody.\\
 
 To determine the diffusivity of small organisms, we can use the Stokes-Einstein equation \citep{einstein1905molekularkinetischen}:
 
