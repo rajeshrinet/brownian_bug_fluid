@@ -368,7 +368,7 @@ Therefore,
 \begin{align}
 \frac{\partial^{2}Q}{\partial q^{2}} & =\frac{\partial}{\partial q}\left(\frac{\partial(r^{d}G)}{\partial r}\frac{\partial r}{\partial q}\right)\label{computedGdQ1-1}\\
  & =r\frac{\partial}{\partial r}\left(dr^{d}G+r^{d+1}\frac{\partial G}{\partial r}\right)\label{computedGdQ2-1}\\
- & =r\frac{\partial}{\partial r}(r^{d+1}\frac{\partial G}{\partial r})+rd\frac{\partial(r^{d}G)}{\partial r}
+ & =r\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)+rd\frac{\partial(r^{d}G)}{\partial r}
 \end{align}
 
 \end{subequations}
@@ -378,9 +378,9 @@ Using Eq.~\ref{eq:FokkerPlanck},
 \begin{subequations}
 
 \begin{align}
-\frac{\partial(r^{d}G)}{\partial t} & =\gamma r\frac{\partial}{\partial r}(r^{d+1}\frac{\partial G}{\partial r})+\gamma dr\frac{\partial(r^{d}G)}{\partial r}-\gamma dr\frac{\partial(r^{d}G)}{\partial r}\label{computedGdQ1-1-1}\\
-r^{d}\frac{\partial G}{\partial t} & =\gamma r\frac{\partial}{\partial r}(r^{d+1}\frac{\partial G}{\partial r})\label{computedGdQ2-1-1}\\
- & =\gamma r^{1-d}\frac{\partial}{\partial r}(r^{d+1}\frac{\partial G}{\partial r}).
+\frac{\partial(r^{d}G)}{\partial t} & =\gamma r\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)+\gamma dr\frac{\partial(r^{d}G)}{\partial r}-\gamma dr\frac{\partial(r^{d}G)}{\partial r}\label{computedGdQ1-1-1}\\
+r^{d}\frac{\partial G}{\partial t} & =\gamma r\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)\label{computedGdQ2-1-1}\\
+ & =\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right).
 \end{align}
 
 \end{subequations}
@@ -392,7 +392,7 @@ if $d=2$ with $r$ being the separation between pairs of particles. $\gamma$ is e
 
 with $\left\langle \ln(r(t))\right\rangle $ being the average obtained from 800 pairs of particles. 
 
-$$\forall t,\left\langle \ln(r(t))\right\rangle =\frac{1}{800}\sum_{p=1}^{800}ln(r(\boldsymbol{x}_{1,p}(t)-\boldsymbol{x}_{2,p}(t)))$$ 
+$$\forall t,\left\langle \ln(r(t))\right\rangle =\frac{1}{800}\sum_{p=1}^{800}\ln(r(\boldsymbol{x}_{1,p}(t)-\boldsymbol{x}_{2,p}(t)))$$ 
 
 where $r(\boldsymbol{x}_{1p}(t)-\boldsymbol{x}_{2p}(t))$ is the distance between a particle $1p$ at position $\boldsymbol{x}_{1p}$ and its counterpart $2p$, initialized with $r(0)=10^{-7}\forall p$ (see Fig.~\ref{fig:gamma_Utot} for $\gamma$ estimates).
 

@@ -105,7 +105,7 @@ Using the variable change $u=2Dr+\gamma r^{3}$, the integral is equivalent
 to $\int\frac{u'}{u}du$.
 
 \begin{align}
- & C^{2}-G(\rho) & = & & -\frac{\lambda C}{2\pi}\frac{1}{4D}[\log(\gamma)-\log(\frac{2D}{r^{2}}+\gamma)]\label{eq:deriv_G_rint2}\\
+ & C^{2}-G(\rho) & = & & -\frac{\lambda C}{2\pi}\frac{1}{4D}\left[\log(\gamma)-\log\left(\frac{2D}{r^{2}}+\gamma\right)\right]\label{eq:deriv_G_rint2}\\
 \Leftrightarrow & G(\rho) & = & & \frac{\lambda C}{8\pi D}\log\left(\frac{2D+\gamma r^{2}}{\gamma r^{2}}\right)+C^{2}\label{eq:G_rho}
 \end{align}
 
@@ -162,7 +162,11 @@ Eq.~\ref{eq:g_int_H} can be used in Eq.~\ref{eq:g_without_advection}:
 which is true. \\
 
 A solution for the Green's function using $\mathcal{L}=\partial_{t}-2D\Delta$
-in 2 dimensions is $$H(r,t)=\frac{1}{4\pi2Dt}\exp(\frac{-r^{2}}{4\times2Dt})$$. 
+in 2 dimensions is 
+
+\begin{equation}
+H(r,t)=\frac{1}{4\pi2Dt}\exp\left(\frac{-r^{2}}{4\times2Dt}\right). 
+\end{equation}
 
 $G(r,t)$ can then be computed:
 
@@ -220,7 +224,7 @@ We successfully replicated both the numerical results and analytical solutions o
 
 The most challenging part of the replication was not actually to replicate the numerical results, but to find back the analytical expression of the pair density function $G(r,t)$ dynamics from first principles. How to derive such dynamics was indeed briefly explained in words in the original article, but the many intermediate steps involved (see Supplementary Material) make the additional mathematical derivations presented here worthwhile in our opinion. In addition to providing critical information to CP and FB regarding how to obtain the pair correlation dynamics, WY also communicated the required mathematical steps to find back the analytical solutions for $G(r,t)$ plotted in Fig. \ref{fig:pcf_Fig3}. We hope that the additional material on the derivation of $G(r,t)$ dynamics (as Supplementary Material) as well as the provided analytical solutions of such dynamics (now presented in the main text) will help readers through both the original and replication articles. \\
 
-The original article did not provide quantitative values exactly matching marine microbes ecology; we thus wondered about the time and spatial scales that could be used for a realistic phytoplankton model. The length of the square side, $L$, is defined roughly as the Kolmogorov scale, the scale at which viscosity starts dominating turbulence  (we use $L= 1$ cm as an upper bound). In the Batchelor-Kolmogorov regime, parent and offspring are separated by a distance lower than $k^{-1}$, where $k$ is the wavenumber for the flow. Here, we consider the smallest wavenumber corresponding to the largest length scale $L$, i.e. $k=2\pi/L$. The chosen length scale defines the Reynolds number which then allows to obtain $U$, the velocity difference between two points separated by a distance $L$. We should indeed note that $U$ corresponds to the velocity \textit{inside} a bigger eddy, not the absolute velocity of the current. 
+The original article did not provide quantitative values exactly matching marine microbes ecology; we thus wondered about the time and spatial scales that could be used for a realistic phytoplankton model. The length of the square side, $L$, is defined roughly as the Kolmogorov scale, the scale at which viscosity starts dominating turbulence  (we use $L= 1$ cm as an upper bound). In the Batchelor-Kolmogorov regime, parent and offspring are separated by a distance lower than $k^{-1}$, where $k$ is the wavenumber for the flow. Here, we consider the smallest wavenumber corresponding to the largest length scale $L$, i.e. $k=2\pi/L$. The chosen length scale defines the Reynolds number which then allows to obtain $U$, the velocity difference between two points separated by a distance $L$.  
  
 \begin{eqnarray}
  Re & = &\frac{U}{k\nu}\\
@@ -228,7 +232,7 @@ The original article did not provide quantitative values exactly matching marine
 \Leftrightarrow U & = &\frac{2\pi\nu}{L}
 \end{eqnarray}
 % 
-where $\nu=10^{-6} \text{ m}^{2}.\text{s}^{-1}$ is the kinematic viscosity for water. These numerical values lead to $U=6.3\times10^{-4} \text{ m.s}^{-1}$. Note that U is the speed in the frame of reference of the small square area considered here, which might itself be embedded within structures moving at higher speeds in the ocean or any large waterbody.\\
+where $\nu=10^{-6} \text{ m}^{2}.\text{s}^{-1}$ is the kinematic viscosity for water. These numerical values lead to $U=6.3\times10^{-4} \text{ m.s}^{-1}$. Note that $U$ is the speed in the frame of reference of the small square area considered here, which might itself be embedded within structures (\textit{e.g.}, bigger eddies) moving at higher speeds in the ocean or any large waterbody.\\
 
 To determine the diffusivity of small organisms, we can use the Stokes-Einstein equation \citep{einstein1905molekularkinetischen}:
 
