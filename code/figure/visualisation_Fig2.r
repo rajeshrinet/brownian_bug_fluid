@@ -6,8 +6,8 @@ graphics.off()
 f=read.table("../simulation/Spatial_distribution_particle_Fig2a.txt",header=F,sep=";",dec='.') #Without birth or death
 colnames(f)=c("t","x","y","yfirst","first_parent")
  
-png("spatial_distribution_Fig2.png",width=450,height=900)
-par(mfrow=c(2,1),cex=1.5,oma=c(0.,.5,.25,0.25))
+png("spatial_distribution_Fig2.png",width=810,height=450)
+par(mfrow=c(1,2),cex=1.5,oma=c(0.,.5,.25,0.25))
 
 ##Create color and parent correspondance, to keep the first y position
 select_t=0
@@ -33,7 +33,7 @@ first_parent=f$first_parent[f$t==select_t]
 
 print(length(x))
 
-plot(0,0,xlim=c(0,1),ylim=c(0,1),t="n",xlab="",ylab="y",xaxt="n")
+plot(0,0,xlim=c(0,1),ylim=c(0,1),t="n",xlab="x",ylab="y")
 for(i in 1:length(y)){
         find_col=table_parent[table_parent[,2]==first_parent[i],3] #Identifying the ancestor of the point, and the corresponding color of such parent
         points(x[i],y[i],pch=19,col=find_col,cex=0.1)
@@ -65,7 +65,7 @@ first_parent=f$first_parent[f$t==select_t]
 
 print(length(x))
 
-plot(0,0,xlim=c(0,1),ylim=c(0,1),t="n",xlab="x",ylab="y")
+plot(0,0,xlim=c(0,1),ylim=c(0,1),t="n",xlab="x",ylab="")
 for(i in 1:length(y)){
         find_col=table_parent[table_parent[,2]==first_parent[i],3] #Identifying the ancestor of the point, and the corresponding color of such parent
         points(x[i],y[i],pch=19,col=find_col,cex=0.1)

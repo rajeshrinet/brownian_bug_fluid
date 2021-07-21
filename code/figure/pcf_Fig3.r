@@ -36,7 +36,7 @@ G_theoretical=function(gamma,rDelta,C_0,U="1",tmax=NA){ #U=0 in the absence of a
 }
 
 
-pdf("pcf_test_Utot_modif_dx_dp.pdf",width=10,height=7.5)
+pdf("pcf_test_Utot_modif_dx_dp.pdf",width=10,height=6)
 par(mfrow=c(1,2),mar=c(4,4.5,1,1))
 f0=read.table('../simulation/pcf_dpow0p25_area10_tmax1000_N200000_U0p0.txt',sep=";",header=T,dec=".")
 f0$rDelta=f0$r/Delta
@@ -90,7 +90,7 @@ lines(c(x1,x2),c(y1,y2),lwd=3)
 text((x1+x2)*0.15,(y1+y2)/2,"-2")
 
 ##Zoom in
-plot(0,0,t="n",xlim=c(0,20),ylim=c(0.,3*10^9),xlab="r/Delta",ylab=expression(paste("g(r,t)-1 (x 10"^"9",")")),yaxt="n")
+plot(0,0,t="n",xlim=c(0,20),ylim=c(0.,3*10^9),xlab=expression(r/Delta),ylab=expression(paste("g(r,t)-1 (x 10"^"9",")")),yaxt="n")
 axis(2,at=c(0,10^9,2*10^9,3*10^9),labels=c(0,1,2,3))
 
 #U=0
