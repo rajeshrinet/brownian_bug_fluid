@@ -1,11 +1,11 @@
 
 \section*{Introduction}
 
-In the present work, we replicate the results of Young et al. 2001 ``Reproductive pair correlations and the clustering of organisms'' \cite{young_reproductive_2001}, an analysis of the formation of aggregates in an otherwise homogeneous environment mimicking marine small-scale hydrodynamics. Using an individual-based model of independent, random-walking particles (also called ``brownian bugs''), they show that reproduction by fission in a turbulent and viscous flow leads to the formation of elongated clusters and therefore departure from the usual, homogeneous solution of the advection-diffusion-reaction equation for a large population. \\
+In the present work, we replicate the results of Young et al. 2001 ``Reproductive pair correlations and the clustering of organisms'' \cite{young_reproductive_2001}, an analysis of the formation of aggregates in an otherwise homogeneous environment mimicking marine small-scale hydrodynamics. Using an individual-based model of independent, random-walking particles (also called ``brownian bugs''), they show that reproduction by fission in a turbulent and viscous flow leads to the formation of elongated clusters. Spatial patterns therefore depart from the usual, homogeneous solution of the advection-diffusion-reaction equation for a large population. \\
 
-Due to their size, microphytoplankton organisms experience a mostly viscous environment in a laminar shear fields, with random, but homogeneous changes in directions due to turbulence \citep{peters_effects_2000}. Reproduction and limited movement of daughter cells, which occur at the phytoplankton scale, interact with these hydrodynamics processes and can lead to aggregates.  In this context, a better understanding of the interactions between demography and small-scale hydrodynamics could provide further explanation for observed spatial distribution of phytoplankton species, and perhaps even their coexistence. This motivated us to revisit Young et al. 2001  \cite{young_reproductive_2001}. \\
+Due to their size, phytoplankton organisms experience a mostly viscous environment in a laminar shear fields, with random, but homogeneous changes in directions due to turbulence \citep{peters_effects_2000}. Reproduction and limited movement of daughter cells, which occur at the phytoplankton scale, interact with these hydrodynamics processes and can lead to aggregates.  In this context, a better understanding of the interactions between demography and small-scale hydrodynamics could provide further explanation for observed spatial distribution of phytoplankton species, and perhaps even their coexistence. This motivated us to revisit Young et al. 2001  \cite{young_reproductive_2001}. \\
 
-In addition to replicating the numerical and mathematical results of Young et al. 2001, we also wish to present the intermediate mathematical steps that were missing from the original paper, which should make this replication article more accessible to most readers, especially those without a fluid mechanics background.  %If we add Bill, then he's included within ``our''
+In addition to replicating the numerical and mathematical results of Young et al. 2001, we also wished to present the intermediate mathematical steps that were missing from the original paper, which should make this replication article more accessible to most readers, especially those without a fluid mechanics background. 
  
 \section*{Methods}
 
@@ -13,13 +13,13 @@ In addition to replicating the numerical and mathematical results of Young et al
 The brownian bug model is a discrete-time, individual-based model, here presented in its 2D formulation. Each particle is characterized by the vector of its Cartesian coordinates $\boldsymbol{x}=\begin{pmatrix} 
       x_1\\ 
       x_2 
-\end{pmatrix}$ and its original position on the y-axis at $t=0$ (a child particle inherits this attribute), this last characteristics being used only for representation purposes. Space is a $L\times L$ square with periodic boundary conditions. Each timestep, of duration $\tau$, is divided into three substeps: (1) demographic processes, (2) diffusion, and (3) advection. \\
+\end{pmatrix}$ and its original position on the y-axis at $t=0$ (a child particle inherits this attribute), this last characteristic being used only for representation purposes. Space is a $L\times L$ square with periodic boundary conditions. Each timestep, of duration $\tau$, is divided into three substeps: (1) demographic processes, (2) diffusion, and (3) advection. \\
 
-(1) Demographic processes take place during the first substep. The discrete-time Markov chain of the brownian bug model can be approximated as a continuous-time spatial birth-death process (described in the Supplementary Material), also referred to in Young et al. \cite{young_reproductive_2001} as a Galton-Watson process. Each organism has a fixed probability ($p$) of reproducing, dying ($q$), or remaining unchanged ($1-p-q$). When an individual reproduces, a new organism appears on top of the parent. In the following, $p=q=0.5$.
+Demographic processes take place during the first substep (1). The discrete-time Markov chain of the brownian bug model can be approximated as a continuous-time spatial birth-death process (described in the Supplementary Material), also referred to in Young et al. \cite{young_reproductive_2001} as a Galton-Watson process. Each organism has a fixed probability ($p$) of reproducing, dying ($q$), or remaining unchanged ($1-p-q$). When an individual reproduces, a new organism appears on top of the parent. In the following, $p=q=0.5$.
 
-(2) Diffusion is modeled as a brownian motion, i.e. $\boldsymbol{x'}(t)=\boldsymbol{x}(t)+\delta\boldsymbol{x}(t)$ where each component of $\delta\boldsymbol{x}(t)$ follows a Gaussian distribution $\mathcal{N}(0,\Delta)$ where $D=\frac{\Delta^2}{2\tau}$ is the diffusivity. 
+(2) Diffusion is then modeled as a brownian motion (2), i.e. $\boldsymbol{x'}(t)=\boldsymbol{x}(t)+\delta\boldsymbol{x}(t)$ where each component of $\delta\boldsymbol{x}(t)$ follows a Gaussian distribution $\mathcal{N}(0,\Delta)$ where $D=\frac{\Delta^2}{2\tau}$ is the diffusivity. 
 
-(3) The turbulent flow governing advective stirring follows the Pierrehumbert random map \citep{pierrehumbert_tracer_1994}.
+Finally, (3) the turbulent flow governing advective stirring follows the Pierrehumbert random map \citep{pierrehumbert_tracer_1994}.
 
 \begin{eqnarray}
  x_1(t+\tau)&=&x'_1(t)+(U\tau/2)\cos[kx'_2(t)+\phi(t)] \label{eq:map1} \\
@@ -95,10 +95,10 @@ we can integrate between 0 and $\rho$,
 \Leftrightarrow & & \frac{\partial G}{\partial r} & & = & & -\frac{1}{2\pi}\frac{2\lambda C}{2D\rho+\gamma\rho^{3}}\label{eq:deriv_G_r}
 \end{align}
 
-Eq.~\ref{eq:deriv_G_r} can now be integrated between $\rho$ and $\infty$, knowing that $G(\infty)=C^{2}.$
+Eq.~\ref{eq:deriv_G_r} can now be integrated between $\rho$ and $\infty$, knowing that $G(\infty)=C^{2}$:
 
 \begin{equation}
- C^{2}-G(\rho) = -\frac{1}{2\pi}{\displaystyle \int_{\rho}^{\infty}}\frac{2\lambda C}{2Dr+\gamma r^{3}}dr\label{eq:deriv_G_r_int1}
+ C^{2}-G(\rho) = -\frac{1}{2\pi}{\displaystyle \int_{\rho}^{\infty}}\frac{2\lambda C}{2Dr+\gamma r^{3}}dr.\label{eq:deriv_G_r_int1}
 \end{equation}
 
 Using the variable change $u=2Dr+\gamma r^{3}$, the integral is equivalent
@@ -153,11 +153,11 @@ By definition, we know that $G(y)=\int H(y,s)2\lambda C\delta(s)ds$
 
 Eq.~\ref{eq:g_int_H} can be used in Eq.~\ref{eq:g_without_advection}:
 
-\begin{alignat}{3}
+\begin{align}
  & \frac{\partial}{\partial t}\left(2\lambda C\int_{0}^{t}H(\boldsymbol{x},t')dt'\right) & & = & & 2D2\lambda C\Delta\int_{0}^{t}H(\boldsymbol{x},t')dt'+2\lambda C\delta(\boldsymbol{x})\\
 \Leftrightarrow & \int_{0}^{t}\left(\frac{\partial H(\boldsymbol{x},t')}{\partial t'}-2D\Delta H(\boldsymbol{x},t')\right)dt' & & = & & \delta(\boldsymbol{x})\\
 \Leftrightarrow & \int_{0}^{t}\delta(\boldsymbol{x})\delta(t')dt' & & = & & \delta(\boldsymbol{x})
-\end{alignat}
+\end{align}
 
 which is true. \\
 
@@ -191,7 +191,7 @@ We were able to reproduce the three figures of Young et al. \cite{young_reproduc
 
 In Fig. \ref{fig:spatial_fig1}, the model has been run without the advection component and we can see the clumping of organisms due to demographic processes. In Fig. \ref{fig:spatial_fig2} a), the model has been run without its demographic component, but with advection and diffusion, confirming that hydrodynamics alone cannot ensure cluster formation, while in Fig.  \ref{fig:spatial_fig2} b), advection, diffusion and demography are present, in which case organisms form aggregates.\\
   
-Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical solutions of Eq.~\ref{eq:eq_2_Young_reduced} was difficult as they were no other equation than Eq. \ref{eq:eq_2_Young_total} in the original paper. We also encountered issues when computing the pair correlation functions on simulations: for large values of $r/\Delta$, we observed zero values (absent pairs) of the pcf when U=0. This is a sampling effect as pcf values get very low for large distances without advection, even though we multiplied the study area by 10 to produce Fig.  \ref{fig:pcf_Fig3} and counter such effects. Despite the missing values, we can confirm that simulated and analytical pcf match (Fig. \ref{fig:pcf_Fig3}), with a slight underestimation by the simulations. The pcf also got closer to 1 than the analytical predictions for larger values of $r$. %% F: predictions -> analytical predictions? 
+Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical solutions of Eq.~\ref{eq:eq_2_Young_reduced} was difficult as they were no other equation than Eq. \ref{eq:eq_2_Young_total} in the original paper. We also encountered issues when computing the pair correlation functions on simulations: for large values of $r/\Delta$, we observed zero values (absent pairs) of the pcf when U=0. This is a sampling effect as pcf values get very low for large distances without advection, even though we multiplied the study area by 10 to produce Fig.  \ref{fig:pcf_Fig3} and counter such effects. Despite the missing values, we can confirm that simulated and analytical pcf match (Fig. \ref{fig:pcf_Fig3}), with a slight underestimation by the simulations. The pcf also got closer to 1 than the analytical predictions for large values of $r$. %% F: predictions -> analytical predictions? 
 
 \begin{figure}[H]
 \begin{center} 
@@ -220,7 +220,7 @@ Fig. \ref{fig:pcf_Fig3} proved much more challenging. Retrieving the analytical 
  
 \section*{Discussion}
 
-We successfully replicated both the numerical results and analytical solutions of Young et al. \citep{young_reproductive_2001}. Even though stochasticity prevents us from replicating exactly the same spatial point patterns as those seen in Fig. \ref{fig:spatial_fig1} and Fig. \ref{fig:spatial_fig2}, we considered the patterns to be close enough to validate the replication. Fig. \ref{fig:pcf_Fig3} was also very close to the one shown in the original article, despite a slight underestimation.\\
+We successfully replicated both the numerical results and analytical solutions of Young et al. \citep{young_reproductive_2001}. Even though stochasticity prevents us from replicating exactly the same spatial point patterns as those seen in Fig. \ref{fig:spatial_fig1} and Fig. \ref{fig:spatial_fig2}, we considered the patterns to be close enough to validate the replication. Fig. \ref{fig:pcf_Fig3} was also very close to the one shown in the original article, despite a slight underestimation of the pcf in simulated data.\\
 
 The most challenging part of the replication was not actually to replicate the numerical results, but to find back the analytical expression of the pair density function $G(r,t)$ dynamics from first principles. How to derive such dynamics was indeed briefly explained in words in the original article, but the many intermediate steps involved (see Supplementary Material) make the additional mathematical derivations presented here worthwhile in our opinion. In addition to providing critical information to CP and FB regarding how to obtain the pair correlation dynamics, WY also communicated the required mathematical steps to find back the analytical solutions for $G(r,t)$ plotted in Fig. \ref{fig:pcf_Fig3}. We hope that the additional material on the derivation of $G(r,t)$ dynamics (as Supplementary Material) as well as the provided analytical solutions of such dynamics (now presented in the main text) will help readers through both the original and replication articles. \\
 

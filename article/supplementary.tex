@@ -4,7 +4,7 @@
 
 \subsubsection*{Diffusion and birth/death processes}
 
-In this part, we aim to find back Eq.~2 in \cite{young_reproductive_2001}, i.e. Eq.~\ref{eq:eq_2_Young_total} in our manuscript. We will first focus on the diffusion and birth/death processes, that is:
+In this section, we aim to find back Eq.~2 in \cite{young_reproductive_2001}, i.e. Eq.~\ref{eq:eq_2_Young_total} in our manuscript. We will first focus on the diffusion and birth/death processes, that is:
 
 \begin{equation}
  \frac{\partial G}{\partial t}=2Dr^{1-d}\frac{\partial}{\partial r}\left(r^{d-1}\frac{\partial G}{\partial r}\right)+2(\lambda-\mu)G+2\lambda C\delta(\boldsymbol{x})\label{eq:eq_2_Young_diffusionbirth}
@@ -17,7 +17,7 @@ space. The
 bug number $p$ is located at $\boldsymbol{x}_{p}=[x_1,x_2,...x_{d}]$.
 At time $t$, the space is defined by (a) the number of brownian
 bugs $k$ and (b) the vector of their locations $\boldsymbol{X}_{k}=[\boldsymbol{x}_{1},\boldsymbol{x}_{2},...\boldsymbol{x}_{k}]$.
-This is also called the Fock space. \\
+This is also called the Fock space \citep{birch_master_2006}. \\
 
 The probability distribution over
 the state space is given by the functions $\mathcal{P}_{k}(\boldsymbol{X}_{k},t)$
@@ -63,9 +63,9 @@ G(\boldsymbol{x},\boldsymbol{y},t)=\sum_{k=2}^{\infty}k(k-1)\int\mathcal{P}_{k}(
 
 We define the two particle distribution functions $c_{k}(\boldsymbol{x},\boldsymbol{y},t)=\int\mathcal{P}_{k}(\boldsymbol{x},\boldsymbol{y},\boldsymbol{X}_{k-2},t)d\boldsymbol{X}_{k-2}$. Note that $G(\boldsymbol{x},\boldsymbol{y},t)=\sum_{k=2}^{\infty}k(k-1)c_{k}(\boldsymbol{x},\boldsymbol{y},t)$.\\
 
-\textbf{\underline{Proposition}}
+\textbf{\underline{Proposition}}\\
 
-We show that
+The true derivative of $c_k$ is given by:
 
 \begin{subequations} 
 \begin{align}
@@ -78,8 +78,7 @@ We show that
 
 \vspace{2em}
 
-\textbf{\underline{Proof}}
-~
+\textbf{\underline{Proof}}\\
 
 We write the evolution of $\mathcal{P}_{k}(\boldsymbol{X}_{k},t)$:
 
@@ -98,7 +97,7 @@ without $\boldsymbol{x}_{p}$. \\
 Here, Eq.~\ref{pk_diffusion} is the diffusion part of the process, 
 Eq.~\ref{pk_same_state} corresponds to the rate at which realizations with $k$ bugs lose a bug by mortality or gain a bug through birth,  Eq.~\ref{pk_death} corresponds to the rate at which realization with $k+1$ bugs lose a bug. Finally, a realization with $k$ bugs can also be produced by a birth in a realization with $k-1$ bugs. \\
 
-Using the derivation of $\mathcal{P}_{k}(\boldsymbol{X}_{k},t)$ and
+Using the time derivative of $\mathcal{P}_{k}(\boldsymbol{X}_{k},t)$ and
 the definition of $c_{k}$, we have:
 
 \begin{subequations} 
@@ -123,7 +122,7 @@ D\int\nabla_{k}^{2}\mathcal{P}_{k}(\boldsymbol{x},\boldsymbol{y},\boldsymbol{X}_
 \end{align}
 \end{subequations}
 
-because we already integrate over $k-2$ coordinates.
+because we already integrate over $k-2$ coordinates (and thus Laplacians for these coordinates are zero).
 
 \paragraph*{Second term (\ref{ck_same_state})}
 
@@ -230,10 +229,10 @@ Thus, $\sum_{p=3}^{k}\sum_{q\neq p}\delta(\boldsymbol{x}_{p}-\boldsymbol{x}_{q})
 Finally, the birth term is
 
 \begin{equation}
-\frac{\lambda}{k}\left(2\delta(\boldsymbol{x}-\boldsymbol{y})b_{k-1}(\boldsymbol{x})+2(k-2)c_{k-1}+(k-2)(k-1)c_{k-1}\right)=2\frac{\lambda}{k}\delta(\boldsymbol{x}-\boldsymbol{y})b_{k-1}(\boldsymbol{x})+\lambda\frac{(k-2)(k+1)}{k}c_{k-1}
+\frac{\lambda}{k}\Bigl(2\delta(\boldsymbol{x}-\boldsymbol{y})b_{k-1}(\boldsymbol{x})+2(k-2)c_{k-1}+(k-2)(k-1)c_{k-1}\Bigr)=2\frac{\lambda}{k}\delta(\boldsymbol{x}-\boldsymbol{y})b_{k-1}(\boldsymbol{x})+\lambda\frac{(k-2)(k+1)}{k}c_{k-1}
 \end{equation}
 
-Combining all terms, we obtain:
+Combining all terms, we obtain the expected result:
 
 \begin{subequations} 
 \begin{align}
@@ -244,7 +243,7 @@ Combining all terms, we obtain:
 \end{align}
 \end{subequations}
 
-\textbf{\underline{Proposition}}
+\textbf{\underline{Proposition}}\\
 
 In cartesian coordinates, the pair density admits the following evolution equation:
 
@@ -254,7 +253,7 @@ In cartesian coordinates, the pair density admits the following evolution equati
 
 \vspace{2em}
 
-\textbf{\underline{Proof}} 
+\textbf{\underline{Proof}}\\ 
 
 Using the definition of $G(\boldsymbol{x},\boldsymbol{y},t)$ and Eq.~\ref{ck_diffusion-1}-\ref{ck_birth-1}:
 
@@ -380,10 +379,12 @@ Using Eq.~\ref{eq:FokkerPlanck},
 \begin{align}
 \frac{\partial(r^{d}G)}{\partial t} & =\gamma r\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)+\gamma dr\frac{\partial(r^{d}G)}{\partial r}-\gamma dr\frac{\partial(r^{d}G)}{\partial r}\label{computedGdQ1-1-1}\\
 r^{d}\frac{\partial G}{\partial t} & =\gamma r\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right)\label{computedGdQ2-1-1}\\
- & =\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right).
+ & =\gamma r^{1-d}\frac{\partial}{\partial r}\left(r^{d+1}\frac{\partial G}{\partial r}\right).\label{last_adv}
 \end{align}
 
 \end{subequations}
+
+Writing Eq.~\ref{last_adv} with Eq.~\ref{eq:eq_2_Young_diffusionbirth}, we obtain Eq.~\ref{eq:eq_2_Young_total}. 
 
 \subsection*{Stretching parameter $\gamma$}
 
@@ -400,6 +401,6 @@ where $r(\boldsymbol{x}_{1p}(t)-\boldsymbol{x}_{2p}(t))$ is the distance between
 \begin{centering}
 \includegraphics[width=0.875\textwidth]{../code/figure/gamma_for_different_Utot.pdf}
 \par\end{centering}
-\caption{Estimates of $\gamma$ for different $U\tau/2$\label{fig:gamma_Utot}}
+\caption{Estimates of $\gamma$ for different $U\tau/2$.\label{fig:gamma_Utot}}
 \end{figure}
 
